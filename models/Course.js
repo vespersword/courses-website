@@ -11,6 +11,14 @@ const CourseSchema = mongoose.Schema({
     },
     description: String,
     duration: Number,
+    rating: {
+        type: Number,
+        default: null
+    },
+    instructor: {
+        type: String,
+        required: true
+    }
 })
 
 module.exports = mongoose.model('Courses', CourseSchema);

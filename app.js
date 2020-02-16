@@ -3,11 +3,41 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 //Middleware
+app.use(cookieParser());
 app.use(bodyParser.urlencoded(
     {extended: false})
-)
+);
+app.use(session({
+    key: 'user_sid',
+    secret: 'somerandonstuffs',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 600000
+    }
+}));
+
+//Middleware to check cookie is saved and if user is not set, then logout user by deleting cookie.
+app.use((req, res, next) => {
+    if (req.cookies.user_sid && !req.session.user) {
+        res.clearCookie('user_sid');        
+    }
+    next();
+});
+
+//Middleware to check if logged in or not.
+var sessionChecker = (req, res, next) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.redirect('/dashboard');
+    } else {
+        next();
+    }    
+};
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.engine('pug', require('pug').__express)

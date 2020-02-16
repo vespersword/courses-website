@@ -43,6 +43,9 @@ nav{
     justify-content: space-around;
     list-style: none;
 }
+a.logo-a{
+    text-decoration: none;
+}
 .nav-link{
     font-size: 18px;
     color: lightslategray;
