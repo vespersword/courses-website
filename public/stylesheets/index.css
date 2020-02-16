@@ -1,0 +1,50 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo-img{
+    height: 100;
+    width: 100;
+}
+
+header{
+    display: flex;
+    background: rgb(133, 187, 231);
+    width: 90%;
+    margin: auto;
+    height: 10vh;
+    align-items: center;
+}
+
+.search-bar-container,.logo-container,.nav-links{
+    display: flex;
+}
+
+.search-bar-container{
+    /*background: rgb(62, 212, 36);*/
+    flex: 2;
+}
+.search-bar{
+    width: 100%;
+}
+.logo-container{
+    flex: 1;
+    align-items: center;
+}
+.logo{
+    font-weight: 400;
+    margin: 5px;
+}
+nav{
+    /*background: rgb(219, 126, 50);*/
+    flex: 4;
+}
+.nav-links{
+    justify-content: space-around;
+    list-style: none;
+}
+.nav-link{
+    font-size: 18px;
+    color: lightslategray;
+    text-decoration: none;
+}
