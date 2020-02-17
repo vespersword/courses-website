@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+//Heroku support
+var port = process.env.PORT || 3000;
+
 //Middleware
 app.use(cookieParser());
 app.use(bodyParser.urlencoded(
@@ -22,7 +25,6 @@ app.use(session({
     }
 }));
 
-var ssn;
 
 //Middleware to check if admin logged in or not.
 var adminChecker = (req, res, next) => {
@@ -60,4 +62,4 @@ mongoose.connect("mongodb+srv://courses_db:rhino123@cluster0-kg3b2.mongodb.net/t
 
 
 
-app.listen(3000, () => console.log("Server running..."))
+app.listen(port, () => console.log("Server running..."))
