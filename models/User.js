@@ -20,6 +20,10 @@ const UserSchema = mongoose.Schema({
     user_type: {
         type: String,
         default: "General"
+    },
+    enrolled_courses: {
+        type: String,
+        default: null
     }
 })
 

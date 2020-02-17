@@ -1,13 +1,21 @@
 const mongoose = require('mongoose');
 
 const CourseSchema = mongoose.Schema({
-    name: {
+    course_name: {
         type: String,
         required: true
     },
     course_code: {
         type: String,
         required: true
+    },
+    course_type: {
+        type: String,
+        default: null
+    },
+    course_category: {
+        type: String,
+        default: null
     },
     description: String,
     duration: Number,
@@ -17,7 +25,15 @@ const CourseSchema = mongoose.Schema({
     },
     instructor: {
         type: String,
-        required: true
+        default: null
+    },
+    content: {
+        type: String,
+        default: null
+    },
+    users_enrolled: {
+        type: String,
+        default: null
     }
 })
 

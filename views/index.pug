@@ -33,7 +33,7 @@ html
                                     div(class="dropdown-divider")
                                     a(class="dropdown-item" href="./logout") Logout
                                     a(class="dropdown-item" href="#") Extra
-                                    if user=="Admin"
+                                    if session.user_type=="Admin"
                                         div(class="dropdown-divider")
                                         a(class="dropdown-item" href="/add-course") Add Courses
 

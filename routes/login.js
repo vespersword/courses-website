@@ -26,7 +26,7 @@ router.post('/', (req, res) =>{
                 resolve("No");
             }
             else{
-                resolve(user.username);
+                resolve(user);
             }
         })
     });
@@ -40,8 +40,9 @@ router.post('/', (req, res) =>{
                });
             }
             else{
-                req.session.username = data;
-                console.log(req.session);
+                req.session.username = data.username;
+                req.session.user_type = data.user_type;
+                //console.log(req.session);
                 res.redirect('/');
                 /*
                 res.render('../views/login', {
