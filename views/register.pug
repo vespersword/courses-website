@@ -25,12 +25,20 @@ html
         h1 This is the Register form
         p #{message}
         p #{data}
-        form(action = "./register" method="post")
-            input(type='text', name="name" placeholder="Enter your username")
-            input(type='password', name="password" placeholder="Enter your password")
-            input(type='password', name="re_pass" placeholder ="Re-enter your password")
-            input(type='submit', value="Submit")
+        form(action="./register" method="post" oninput='re_pass.setCustomValidity(re_pass.value != password.value ? "Passwords do not match." : "")')
+            p
+            label(for="username") Username:
+            input(id="username" name="name" type='text' required)
+            p
+            label(for="password1") Password:
+            input(id="password1" type='password' required name='password')
+            p
+            label(for="password2") Confirm password:
+            input(id="password2" type='password' name='re_pass')
+            p
+            input(type='submit' value="Create account")
     
+    //script(src="/scripts/reg-form-val.js")
     script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")
     script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")
     script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js", integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6", crossorigin="anonymous")

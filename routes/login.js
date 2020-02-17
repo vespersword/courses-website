@@ -10,7 +10,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', (req, res) =>{
-    
+    var uname = req.body.name;
+
 })
 
 module.exports = router;
