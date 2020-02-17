@@ -11,43 +11,51 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res) => {
     //console.log(req.body);
-    var error_status = 0;
-    var duplicate = 0;
-    message1 = "Something went wrong please try again.";
-    data1 = "";
-    var uname = req.body.name;
-    User.findOne({username: uname}, (err, usr) =>{
-        if(err) console.log(err);
+    var promise = new Promise(function(resolve, reject) {
+        // do a thing, possibly async, then…
+        var uname = req.body.name;
+        User.findOne({username: uname}, (err, usr) =>{
+        if(err) return reject(err);
         if(usr){
-            console.log("Duplicate User");
-            message1 = "Username is already taken.";
+            //console.log("Duplicate User");
+            //message1 = "Username is already taken.";
+            resolve("Duplicate");
         }
-        else{
-            const user = new User({
-                username: req.body.name,
-                password: req.body.password
-            });
-        
-            user.save((err, user) =>{
-                if(err){
-                    error_status = 1;
-                    return console.log(err)
-                }
-                else{
-                    console.log("User successfully added.");
-                }
-            })
-            if(error_status == 0) {
-                message1 = "Registration Successful";
-                data1 = JSON.stringify(req.body);
+        else {
+           resolve("New");
+        }
+      });
+    });
+    promise
+        .then((data) => {
+            if(data=="Duplicate"){
+                console.log("Username taken");
+                res.render('../views/register',{
+                    message: "Username is already taken.",
+                    data: "This is a duplicate username test message sent through pug."
+                })
             }
-        }
-    })
-    
-    res.render('../views/register',{
-        message: message1,
-        data: data1
-    })
-});
+            else if(data=="New"){
+                const user = new User({
+                    username: req.body.name,
+                    password: req.body.password
+                });
+                user.save((err, user) =>{
+                    if(err){
+                        error_status = 1;
+                        return console.log(err)
+                    }
+                    else{
+                        console.log("User successfully added.");
+                        res.render('../views/register',{
+                            message: "Registered Successfully",
+                            data: "This is successfull registration test message."
+                        });
+                    }
+                })
+            }
+        })
+        
+    });
 
 module.exports = router;
