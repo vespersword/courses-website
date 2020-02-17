@@ -9,7 +9,8 @@ body{
 
 header{
     display: flex;
-    background: rgb(133, 187, 231);
+    /*background: rgb(133, 187, 231);*/
+    background: linear-gradient(to bottom, #FED066 0%, #FDB73D 100%);
     width: 90%;
     margin: auto;
     height: 10vh;

@@ -15,13 +15,27 @@ html
                 ul(class='nav-links')
                     a(class='nav-link'): li Courses
                     a(class='nav-link'): li Campus View
-                    li(class='nav-link') 
-                        div(class="dropdown")
-                            button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Login/Register
-                            div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
-                                a(class="dropdown-item" href="./login") Login
-                                a(class="dropdown-item" href="./register") Register
-                                a(class="dropdown-item" href="#") Extra
+                    -var user = session.username
+                    if !user
+                        li(class='nav-link') 
+                            div(class="dropdown")
+                                button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Login/Register
+                                div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+                                    a(class="dropdown-item" href="./login") Login
+                                    a(class="dropdown-item" href="./register") Register
+                                    a(class="dropdown-item" href="#") Extra
+                    else
+                        li(class='nav-link')
+                            div(class="dropdown")
+                                button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{user}
+                                div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+                                    a(class="dropdown-item" href="./users/#{user}") Signed in as #{user}
+                                    div(class="dropdown-divider")
+                                    a(class="dropdown-item" href="./logout") Logout
+                                    a(class="dropdown-item" href="#") Extra
+                                    if user=="Admin"
+                                        div(class="dropdown-divider")
+                                        a(class="dropdown-item" href="/add-course") Add Courses
 
         main
             h1 Welcome to Courses.

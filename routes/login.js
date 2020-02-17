@@ -4,9 +4,11 @@ const User = require('../models/User')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    console.log(req.session);
     res.render('../views/login', { 
         message: 'Enter your details',
-        data: 'This is data'
+        data: 'This is data',
+        session: req.session
    });
 });
 
@@ -33,15 +35,19 @@ router.post('/', (req, res) =>{
             if(data=="No"){
                 res.render('../views/login', { 
                     message: 'Invalid username/password',
-                    data: 'This is data'
+                    data: 'This is data',
+                    session: req.session
                });
             }
             else{
-                ssn.username = data;
-                console.log(ssn);
+                req.session.username = data;
+                console.log(req.session);
+                res.redirect('/');
+                /*
                 res.render('../views/login', {
-                    message: 'Login successful'
-                })
+                    message: 'Login successful',
+                    session: req.session
+                })*/
             }
         })
 });

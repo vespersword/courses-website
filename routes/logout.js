@@ -4,11 +4,12 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log(req.session);
-  res.render('../views/index', { 
-      message: 'Enter your details',
-      data: 'This is data',
-      session: req.session
- });
+  req.session.destroy(function(err){
+      if(err) console.log(err);
+      else{
+          res.redirect('/');
+      }
+  })
 });
 
 module.exports = router;
