@@ -13,26 +13,20 @@ app.use(bodyParser.urlencoded(
 );
 app.use(session({
     key: 'user_sid',
-    secret: 'somerandonstuffs',
+    secret: 'this is a secret',
     resave: false,
     saveUninitialized: false,
     cookie: {
-        expires: 600000
+        secure: true
     }
 }));
 
-//Middleware to check cookie is saved and if user is not set, then logout user by deleting cookie.
-app.use((req, res, next) => {
-    if (req.cookies.user_sid && !req.session.user) {
-        res.clearCookie('user_sid');        
-    }
-    next();
-});
+var ssn;
 
 //Middleware to check if logged in or not.
 var sessionChecker = (req, res, next) => {
-    if (req.session.user && req.cookies.user_sid) {
-        res.redirect('/dashboard');
+    if (!req.session.user) {
+        res.redirect('/index');
     } else {
         next();
     }    
