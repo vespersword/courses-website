@@ -13,8 +13,8 @@ html
                 div(class='search-bar'): input(type=text placeholder="Search for your courses here...")
             nav
                 ul(class='nav-links')
-                    a(class='nav-link'): li Courses
-                    a(class='nav-link'): li Campus View
+                    a(class='nav-link' href="./courses"): li Courses
+                    a(class='nav-link' href="./users"): li Users
                     -var user = session.username
                     if !user
                         li(class='nav-link') 

@@ -1,7 +1,7 @@
 html
     head
-        title Register
         link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+        title Welcome to Courses!
         style
             include ../public/stylesheets/index.css
     body
@@ -36,46 +36,11 @@ html
                                     if session.user_type=="Admin"
                                         div(class="dropdown-divider")
                                         a(class="dropdown-item" href="/add-course") Add Courses
-        h1 This is the admin exclusive course add page.
-        p #{message}
-        p #{data}
-        form(class="form-horizontal" action="./add-course" method="post")
-            fieldset
-                legend Add Course
-                div(class="form-group")
-                    label(class="col-md-4 control-label" for="textinput") Course Name
-                    div(class="col-md-4")
-                    input(id="textinput" name="course_name" type="text" placeholder="Enter the name of the course" class="form-control input-md" required="")
 
-                div(class="form-group")
-                    label(class="col-md-4 control-label" for="textinput") Course Code
-                    div(class="col-md-4")
-                    input(id="textinput" name="course_code" type="text" placeholder="Enter course code" class="form-control input-md" required="")
+        main
+            h1 Below we have a course list,
+        
 
-                div(class="form-group")
-                    label(class="col-md-4 control-label" for="textinput") Course Category
-                    div(class="col-md-4")
-                    input(id="textinput" name="course_category" type="text" placeholder="Enter course category" class="form-control input-md" required="")
-
-                div(class="form-group")
-                    label(class="col-md-4 control-label" for="selectbasic") Course Type
-                    div(class="col-md-2")
-                        select(id="selectbasic" name="course_type" class="form-control")
-                            option(value="General") General
-                            option(value="College") College
-
-                div(class="form-group")
-                    label(class="col-md-4 control-label" for="textarea") Course Description
-                    div(class="col-md-4")             
-                        textarea(class="form-control" id="textarea" name="description")
-    
-                <!-- Button -->
-                div(class="form-group")
-                    label(class="col-md-4 control-label" for="singlebutton")
-                        div(class="col-md-4")
-                            button(id="singlebutton" name="singlebutton" class="btn btn-primary") Submit
-    
-    //script(src="/scripts/reg-form-val.js")
     script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")
     script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")
     script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js", integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6", crossorigin="anonymous")
