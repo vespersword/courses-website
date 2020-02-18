@@ -5,13 +5,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const flash = require('express-flash-notification');
 
 //Heroku support
 var port = process.env.PORT || 3000;
 
 //Middleware
-app.use(flash(app));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded(
     {extended: false})
