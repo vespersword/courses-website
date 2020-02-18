@@ -38,17 +38,15 @@ html
                                         a(class="dropdown-item" href="/add-course") Add Courses
 
         main
-            h1 Below we have a course list,
-            div(class="card-deck")
-                each course in course_list
-                    div(class = "col-md-3")
-                        div(class="card" style="width: 18rem;, object-fit: cover")
-                            img(class="card-img-top" src="/images/Maths_placeholder.png" alt="Card image cap" style="width: 100%")
-                            div(class="card-body")
-                                h5(class="card-title") #{course.course_name}
-                                p(class="card-text") #{course.description}
-                                a(href="/courses/"+course.course_code class="btn btn-primary") View Course Page
-            
+            h1 Welcome to Courses.
+            div(class="jumbotron.jumbotron-fluid")
+                div(class="container")
+                    h1(class="display-4") #{course[0].course_code}
+                    p(class="lead")
+                        | Click below to enroll
+                        form(class="display-6" method="post" action="/courses/"+course[0].course_code)
+                            input(type="hidden" name="enroll_course_code" value=course[0].course_code)
+                            input(type="submit" value="Enroll")
 
 
 

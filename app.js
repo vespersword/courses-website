@@ -5,11 +5,13 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const flash = require('express-flash-notification');
 
 //Heroku support
 var port = process.env.PORT || 3000;
 
 //Middleware
+app.use(flash(app));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded(
     {extended: false})
@@ -34,6 +36,15 @@ var adminChecker = (req, res, next) => {
         next();
     }    
 };
+
+var loginChecker = (req, res, next) =>{
+    if (!req.session.username){
+        res.send(alert("Please login first."))
+    }
+    else{
+        next();
+    }
+}
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -61,7 +72,5 @@ mongoose.connect("mongodb+srv://courses_db:rhino123@cluster0-kg3b2.mongodb.net/t
 { useNewUrlParser: true, useUnifiedTopology: true }
 ,() => console.log("DB Connection successful...")
 )
-
-
-
+   
 app.listen(port, () => console.log("Server running..."))

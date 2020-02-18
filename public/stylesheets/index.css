@@ -7,6 +7,11 @@ body{
     width: 100;
 }
 
+.card-img-top{
+    width: 200;
+    height: 200;
+}
+
 header{
     display: flex;
     /*background: rgb(133, 187, 231);*/
