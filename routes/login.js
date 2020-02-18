@@ -3,13 +3,16 @@ const router = express.Router();
 const User = require('../models/User')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/',  function(req, res, next) {
     console.log(req.session);
     res.render('../views/login', { 
         message: 'Enter your details',
         data: 'This is data',
-        session: req.session
+        session: req.session,
+        error: req.session.error
    });
+   delete req.session.error;
+   console.log(req.session);
 });
 
 router.post('/', (req, res) =>{

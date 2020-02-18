@@ -3,9 +3,10 @@ const router = express.Router();
 const Course = require('../models/Course');
 
 //Middleware to check if user is logged in
-var loginChecker = (req, res, next) =>{
+var enrollLoginChecker = (req, res, next) =>{
     if (!req.session.username){
-        res.send(alert("Please login first."))
+        req.session.error = "Please login before enrolling in a course."
+        res.redirect('../login');
     }
     else{
         next();
@@ -58,8 +59,8 @@ router.get('/:coursecode', function(req, res){
     })
 })
 
-router.post('/:coursecode', function(req, res){
-    
+router.post('/:coursecode', enrollLoginChecker, function(req, res){
+    res.json({success:true});
 })
 
 });
