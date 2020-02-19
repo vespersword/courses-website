@@ -59,6 +59,7 @@ const regRoute = require('./routes/register');
 const logoutRoute = require('./routes/logout');
 const addCourseRoute = require('./routes/add-course');
 const coursesRoute = require('./routes/courses');
+const usersRoute = require('./routes/users');
 //Routing
 app.use('/', indexRoute);
 app.use('/login', loginRoute);
@@ -66,6 +67,7 @@ app.use('/register', regRoute);
 app.use('/logout', logoutRoute);
 app.use('/add-course', adminChecker, addCourseRoute);
 app.use('/courses', coursesRoute);
+app.use('/users', usersRoute);
 
 //Database Connection
 mongoose.connect("mongodb+srv://courses_db:rhino123@cluster0-kg3b2.mongodb.net/test?retryWrites=true&w=majority",
