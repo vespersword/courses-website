@@ -48,6 +48,10 @@ html
                     if enrolled
                         p(class="lead")
                             | Already Enrolled in this Course.
+                            | Click below to dropout
+                            form(class="display-6" method="post" action="/courses/"+course[0].course_code+"/delete")
+                                input(type="hidden" name="enroll_course_code" value=course[0].course_code)
+                                input(type="submit" value="Dropout")
                     else
                         p(class="lead")
                             | Click below to enroll

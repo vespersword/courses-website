@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Course = require('../models/Course');
+const User = require('../models/User');
 
 //Middleware to check if user is logged in
 var enrollLoginChecker = (req, res, next) =>{
@@ -67,18 +68,50 @@ router.post('/:coursecode', enrollLoginChecker, async function(req, res){
     })
     if(req.session.courses_enrolled == null){
         req.session.courses_enrolled = [course[0].course_code];
-        console.log("This log is happening if null");
-        console.log(req.session.courses_enrolled);
+        await User.updateOne({username: req.session.username}, {enrolled_courses: req.session.courses_enrolled},
+            (err, numUpdated) => {
+                if(err) return err;
+                console.log("Course added successfully in DB");
+            }
+            );
     }
     else{
-        console.log("This log happens if not null");
         req.session.courses_enrolled.push(course[0].course_code);
-        console.log(req.session.courses_enrolled);
+        await User.updateOne({username: req.session.username}, {enrolled_courses: req.session.courses_enrolled},
+            (err, numUpdated) => {
+                if(err) return err;
+                console.log("Course added successfully in DB");
+            }
+            );
     }
     res.render('../views/course',{
         session: req.session,
         course: course
     })
+
+    }
+    catch(e){console.log(e)}
+})
+
+router.post('/:coursecode/delete', enrollLoginChecker, async function(req, res){
+    try{
+    var course = await Course.find({course_code: req.params.coursecode},(err, course) =>{
+        if(err) return (err);
+        return course;
+    })
+    
+    var del_index = req.session.courses_enrolled.indexOf(req.params.coursecode);
+    if(del_index > -1){
+    req.session.courses_enrolled.splice(del_index, 1);
+    }
+    await User.updateOne({username: req.session.username}, {enrolled_courses: req.session.courses_enrolled},
+        (err, numUpdated) => {
+            if(err) return err;
+            console.log("Course deleted successfully in DB");
+        }
+        );
+
+    res.redirect('/'+req.params.coursecode);
 
     }
     catch(e){console.log(e)}
