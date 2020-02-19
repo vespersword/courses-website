@@ -4,21 +4,19 @@ const User = require('../models/User')
 
 /* GET home page. */
 router.get('/',  function(req, res, next) {
-    console.log(req.session);
+    //console.log(req.session);
     res.render('../views/login', { 
         message: 'Enter your details',
         data: 'This is data',
-        session: req.session,
-        error: req.session.error
+        session: req.session
    });
-   delete req.session.error;
-   console.log(req.session);
+   //console.log(req.session);
 });
 
 router.post('/', (req, res) =>{
     var uname = req.body.name;
     var pass = req.body.password;
-    var ssn = req.session;
+    //var ssn = req.session;
     var promise = new Promise(function(resolve, reject){
         User.findOne({username: uname}, (err, user) =>{
             if(err) return reject(err);
@@ -45,7 +43,9 @@ router.post('/', (req, res) =>{
             else{
                 req.session.username = data.username;
                 req.session.user_type = data.user_type;
-                //console.log(req.session);
+                req.session.courses_enrolled = data.courses_enrolled;
+                console.log(req.session);
+                //req.session.courses_enrolled.push("test");
                 res.redirect('/');
                 /*
                 res.render('../views/login', {

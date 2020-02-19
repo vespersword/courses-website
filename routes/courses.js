@@ -50,6 +50,7 @@ router.get('/:coursecode', function(req, res){
             session: req.session,
             course: course
         })
+        //console.log(course);
     })
     .catch((err)=>{
         console.log(err);
@@ -59,7 +60,32 @@ router.get('/:coursecode', function(req, res){
 })
 
 router.post('/:coursecode', enrollLoginChecker, function(req, res){
-    res.json({success:true});
+    var course_page_promise = Course.find({course_code: req.params.coursecode},(err, course) =>{
+        if(err) return (err);
+        return course;
+    })
+    course_page_promise
+    .then((course) =>{
+    if(req.session.courses_enrolled == null){
+        //console.log(course);
+        //req.session.courses_enrolled.push(course[0].course_code);
+        req.session.coures_enrolled = [course[0].course_code];
+        console.log("This log is happening if null");
+        console.log(req.session);
+    }
+    else{
+        console.log("This log happens if not null");
+        req.session.courses_enrolled.push(course[0].course_code);
+        console.log(req.session);
+    }
+    console.log("Session after updating enrolled course:");
+    console.log(req.session);
+    res.render('../views/course',{
+        session: req.session,
+        course: course
+    })
+    })
+    .catch((err) => console.log(err));
 })
 
 });

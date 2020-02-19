@@ -22,8 +22,8 @@ const UserSchema = mongoose.Schema({
         default: "General"
     },
     enrolled_courses: {
-        type: String,
-        default: []
+        type: [String],
+        default: null
     }
 })
 

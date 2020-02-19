@@ -21,17 +21,17 @@ html
                             div(class="dropdown")
                                 button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Login/Register
                                 div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
-                                    a(class="dropdown-item" href="./login") Login
-                                    a(class="dropdown-item" href="./register") Register
+                                    a(class="dropdown-item" href="../login") Login
+                                    a(class="dropdown-item" href="../register") Register
                                     a(class="dropdown-item" href="#") Extra
                     else
                         li(class='nav-link')
                             div(class="dropdown")
                                 button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{user}
                                 div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
-                                    a(class="dropdown-item" href="./users/#{user}") Signed in as #{user}
+                                    a(class="dropdown-item" href="../users/#{user}") Signed in as #{user}
                                     div(class="dropdown-divider")
-                                    a(class="dropdown-item" href="./logout") Logout
+                                    a(class="dropdown-item" href="../logout") Logout
                                     a(class="dropdown-item" href="#") Extra
                                     if session.user_type=="Admin"
                                         div(class="dropdown-divider")
@@ -42,11 +42,18 @@ html
             div(class="jumbotron.jumbotron-fluid")
                 div(class="container")
                     h1(class="display-4") #{course[0].course_code}
-                    p(class="lead")
-                        | Click below to enroll
-                        form(class="display-6" method="post" action="/courses/"+course[0].course_code)
-                            input(type="hidden" name="enroll_course_code" value=course[0].course_code)
-                            input(type="submit" value="Enroll")
+                    -
+                        var enrolled = false;
+                        if(session.courses_enrolled!=null &&session.courses_enrolled.includes(course[0].course_code)) enrolled = true;
+                    if enrolled
+                        p(class="lead")
+                            | Already Enrolled in this Course.
+                    else
+                        p(class="lead")
+                            | Click below to enroll
+                            form(class="display-6" method="post" action="/courses/"+course[0].course_code)
+                                input(type="hidden" name="enroll_course_code" value=course[0].course_code)
+                                input(type="submit" value="Enroll")
                 p #{flash}
 
     script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")
