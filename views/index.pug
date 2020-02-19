@@ -4,7 +4,7 @@ html
         title Welcome to Courses!
         style
             include ../public/stylesheets/index.css
-    body
+    body   
         header
             a(href='/' class='logo-a'): div(class='logo-container')
                 img(class='logo-img' src="/images/book.svg" alt="This is my Logo")
@@ -38,8 +38,35 @@ html
                                         a(class="dropdown-item" href="/add-course") Add Courses
 
         main
-            h1 Welcome to Courses.
-        
+            div(class="jumbotron card card-image")
+                div(class="text-white text-center py-5 px-4")
+                    h1(class="card-title h1-responsive pt-3 mb-5 font-bold" style="font-size: 10vh;"): strong Welcome to Coursem!
+                    div(class="row d-flex justify-content-center")
+                        div(class="col-xl-7 pb-2")
+                            h2: p(class="mx-5 mb-5") Build skills with courses, certificates, and degrees online from world-class universities and companies
+                    hr(class="my-4" style="border: 1px solid white")
+                    
+                    div(class="pt-2")
+                        a(class="btn btn-lg" style="background: red;") Login
+                        a(class="btn btn-lg" style="background: grey;") Register
+            
+            div(class="container")
+                div(class="text-center"): h3 Achieve your dreams
+                div(class="row")
+                    div(class="col-md-4")
+                        h4 Get career ready
+                        p Donec id elit non mi porta gravida at eget metus. 
+                        p: a(class="btn btn-secondary" href="#" role="button") View details &raquo;
+                    div(class="col-md-4")
+                        h4 Learn from the best teachers
+                        p Donec id elit non mi porta gravida at eget metus. 
+                        p: a(class="btn btn-secondary" href="#" role="button") View details &raquo;
+                    div(class="col-md-4")
+                        h4 Get the best skill development
+                        p Donec id elit non mi porta gravida at eget metus. 
+                        p: a(class="btn btn-secondary" href="#" role="button") View details &raquo;
+                hr
+                            
 
     script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")
     script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")

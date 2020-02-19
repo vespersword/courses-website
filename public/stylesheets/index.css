@@ -16,9 +16,9 @@ header{
     display: flex;
     /*background: rgb(133, 187, 231);*/
     background: linear-gradient(to bottom, #FED066 0%, #FDB73D 100%);
-    width: 90%;
+    width: 100%;
     margin: auto;
-    height: 10vh;
+    height: 9vh;
     align-items: center;
 }
 
@@ -28,32 +28,61 @@ header{
 
 .search-bar-container{
     /*background: rgb(62, 212, 36);*/
-    flex: 2;
+    flex: 8;
 }
 .search-bar{
     width: 100%;
 }
 .logo-container{
-    flex: 1;
+    /*background: brown;*/
+    flex: 2;
     align-items: center;
 }
 .logo{
-    font-weight: 400;
-    margin: 5px;
+    font-weight: bold;
+    margin: 10px;
 }
 nav{
     /*background: rgb(219, 126, 50);*/
-    flex: 4;
+    flex: 1;
 }
 .nav-links{
-    justify-content: space-around;
+    justify-content: right;
     list-style: none;
+    align-items: center;
+
 }
 a.logo-a{
     text-decoration: none;
 }
+
 .nav-link{
     font-size: 18px;
-    color: lightslategray;
+    color: rgb(1, 33, 65);
     text-decoration: none;
 }
+
+.nav-link:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+.jumbotron{
+    background-image: url("../images/home_jumbo.png");
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.3)
+      ), url("../images/home_jumbo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*text-shadow: 1px 1px black;
+    filter: grayscale(40%);*/
+}
+
+
+.btn-grad1 {background-image: linear-gradient(to right, #36D1DC 0%, #5B86E5 51%, #36D1DC 100%)}
+.btn-grad1:hover { background-position: right center; }
+
+.btn-grad2 {background-image: linear-gradient(to right, #3A1C71 0%, #D76D77 51%, #3A1C71 100%)}
+.btn-grad2:hover { background-position: right center; }
