@@ -12,7 +12,7 @@ var enrollLoginChecker = (req, res, next) =>{
     }
 }
 
-/* GET home page. */
+/* GET courses page. */
 router.get('/', function(req, res, next) {
   //console.log("Session on index");
   //console.log(req.session);
@@ -59,31 +59,29 @@ router.get('/:coursecode', function(req, res){
     })
 })
 
-router.post('/:coursecode', enrollLoginChecker, function(req, res){
-    var course_page_promise = Course.find({course_code: req.params.coursecode},(err, course) =>{
+router.post('/:coursecode', enrollLoginChecker, async function(req, res){
+    try{
+    var course = await Course.find({course_code: req.params.coursecode},(err, course) =>{
         if(err) return (err);
         return course;
     })
-    course_page_promise
-    .then((course) =>{
     if(req.session.courses_enrolled == null){
-        req.session.coures_enrolled = [course[0].course_code];
+        req.session.courses_enrolled = [course[0].course_code];
         console.log("This log is happening if null");
-        console.log(req.session);
+        console.log(req.session.courses_enrolled);
     }
     else{
         console.log("This log happens if not null");
         req.session.courses_enrolled.push(course[0].course_code);
-        console.log(req.session);
+        console.log(req.session.courses_enrolled);
     }
-    console.log("Session after updating enrolled course:");
-    console.log(req.session);
     res.render('../views/course',{
         session: req.session,
         course: course
     })
-    })
-    .catch((err) => console.log(err));
+
+    }
+    catch(e){console.log(e)}
 })
 
 });

@@ -44,7 +44,7 @@ router.post('/', (req, res) =>{
                 req.session.username = data.username;
                 req.session.user_type = data.user_type;
                 req.session.courses_enrolled = data.courses_enrolled;
-                console.log(req.session);
+                //console.log(req.session.courses_enrolled);
                 //req.session.courses_enrolled.push("test");
                 res.redirect('/');
                 /*
