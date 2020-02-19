@@ -39,17 +39,29 @@ html
 
         main
             h1 Below we have a course list,
-            div(class="card-deck")
-                each course in course_list
-                    div(class = "col-md-3")
-                        div(class="card" style="width: 18rem;, object-fit: cover")
-                            img(class="card-img-top" src="/images/Maths_placeholder.png" alt="Card image cap" style="width: 100%")
-                            div(class="card-body")
-                                h5(class="card-title") #{course.course_name}
-                                p(class="card-text") #{course.description}
-                                a(href="/courses/"+course.course_code class="btn btn-primary") View Course Page
-            
-
+            .row
+                .col-4
+                    #myList.list-group(role='tablist')
+                        a.list-group-item.list-group-item-action.active(data-toggle='list', href='#home', role='tab') Maths
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#profile', role='tab') Physics
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#messages', role='tab') Computer Science
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#settings', role='tab') Other
+                    // Tab panes
+                .col-8
+                    .tab-content
+                        #home.tab-pane.active(role='tabpanel') This is 1
+                            div(class="card-deck")
+                            each course in course_list
+                                .card.text-white.bg-primary.mb-3(style='max-width: 20rem;')
+                                    .card-header #{course.course_code}
+                                        .card-body
+                                            h5.card-title #{course.course_name}
+                                            p.card-text.text-white 
+                                            | #{course.course_description}
+                                            a(href="/courses/"+course.course_code class="btn btn-secondary") View Course Page
+                        #profile.tab-pane(role='tabpanel') This is 2
+                        #messages.tab-pane(role='tabpanel') This is 3
+                        #settings.tab-pane(role='tabpanel') This is 4
 
 
     script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")

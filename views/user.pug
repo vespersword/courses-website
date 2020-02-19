@@ -41,14 +41,13 @@ html
             h1 Below we have a registered course list,
             div(class="card-deck")
                 each course in course_list
-                    div(class = "col-md-3")
-                        div(class="card" style="width: 18rem;, object-fit: cover")
-                            img(class="card-img-top" src="/images/Maths_placeholder.png" alt="Card image cap" style="width: 100%")
-                            div(class="card-body")
-                                h5(class="card-title") #{course.course_name}
-                                p(class="card-text") #{course.description}
+                    .card.text-white.bg-primary.mb-3(style='max-width: 20rem;')
+                        .card-header #{course.course_code}
+                            .card-body
+                                h5.card-title #{course.course_name}
+                                p.card-text.text-white #{course.course_description}
                                 a(href="/courses/"+course.course_code class="btn btn-primary") View Course Page
-            
+
 
 
 
