@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+//commit test
 /* GET home page. */
 router.get('/', function(req, res, next) {
   //console.log("Session on index");
