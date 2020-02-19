@@ -67,8 +67,6 @@ router.post('/:coursecode', enrollLoginChecker, function(req, res){
     course_page_promise
     .then((course) =>{
     if(req.session.courses_enrolled == null){
-        //console.log(course);
-        //req.session.courses_enrolled.push(course[0].course_code);
         req.session.coures_enrolled = [course[0].course_code];
         console.log("This log is happening if null");
         console.log(req.session);
