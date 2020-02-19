@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const flash = require('express-flash-notification');
 
 //Heroku support
 var port = process.env.PORT || 3000;
@@ -24,6 +25,7 @@ app.use(session({
         maxAge: 1400000
     }
 }));
+app.use(flash(app));
 
 
 //Middleware to check if admin logged in or not.

@@ -5,8 +5,7 @@ const Course = require('../models/Course');
 //Middleware to check if user is logged in
 var enrollLoginChecker = (req, res, next) =>{
     if (!req.session.username){
-        req.session.error = "Please login before enrolling in a course."
-        res.redirect('../login');
+        req.flash('error','Please login first');
     }
     else{
         next();
