@@ -67,7 +67,7 @@ html
                             br
                             h4 Name: #{userpage.name}
                             br
-                            h4 description: #{userpage.description}
+                            h4 University: #{userpage.university}
                             br
                             h4 User Type: #{userpage.user_type}
                             br
@@ -87,15 +87,7 @@ html
 
                         #edit.tab-pane(role='tabpanel') This is 4
                             div(class="d-flex justify-content-center")
-                                form(action="./register" method="post" oninput='re_pass.setCustomValidity(re_pass.value != password.value ? "Passwords do not match." : "")')
-                                    p
-                                    label(for="username") Username:
-                                    input(class="form-control" id="username" name="name" type='text' required)
-                                    p
-                                    label(for="account_type") Account Type:
-                                    select(class="form-control" id="account_type" name="account_type")
-                                        option(value="General") General
-                                        option(value="Instructor") Instructor
+                                form(action="./"+userpage.username method="post")
                                     p
                                     label(for="university") University:
                                     select(class="form-control" id="university" name="university")
@@ -105,15 +97,12 @@ html
                                     span(class="help-block") Select your affiliation
                                     p
                                     label(for="real_name") Name:
-                                    input(class="form-control" id="real_name" required name="real_name" type="text" placeholder="Enter your name here.")
+                                    input(class="form-control" id="real_name" required name="real_name" type="text" placeholder="Enter your name here." value=userpage.name)
                                     p
-                                    label(for="password1") Password:
-                                    input(class="form-control" id="password1" type='password' required name='password')
+                                    label(for="password1") New Password(default value is old password):
+                                    input(class="form-control" id="password1" type='password' name='password' value=userpage.password)
                                     p
-                                    label(for="password2") Confirm password:
-                                    input(class="form-control" id="password2" type='password' name='re_pass')
-                                    p
-                                    input(type='submit' value="Create account")
+                                    input(type='submit' value="Submit Changes")
             
 
 

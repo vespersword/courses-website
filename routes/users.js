@@ -72,7 +72,16 @@ router.get('/:username', LoginChecker, async function(req, res, next){
 });
 
 router.post('/:username', async function(req, res, next){
-    res.send("Work in progress");
+    try{
+    var query = {username: req.session.username};
+    var newData = {description: req.body.description, password: req.body.password, name: req.body.real_name, university: req.body.university};
+    await User.updateOne(query,newData,{upsert: true}, function(err, doc){
+        if(err) return err;
+        return console.log("Details update successful.");
+    });
+    }
+    catch(err){console.log(err)};
+    res.redirect('/users/'+req.session.userpage_username);
 });
 
 module.exports = router;
