@@ -7,7 +7,7 @@ This website is a mix between an open online course platform and a course platfo
   
 <h1> This is a course registration website implemented with Express along with MongoDB and PUG as a template engine. </h1>
 
-<h2> Implementation Details
+<h2> Implementation Details </h2>
   <ul>
     <li> <b> Promises and Async/Await: </b> <br>
         These have been used everytime we do something with the database like retrieving data to load content on a page.
