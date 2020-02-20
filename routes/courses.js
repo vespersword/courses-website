@@ -129,28 +129,30 @@ router.post('/:coursecode', enrollLoginChecker, checkUniExclusive, checkCredits,
     //console.log(req.session.users_enrolled);
     if(req.session.users_enrolled == null){
         var enrolled_users = [req.session.username];
+        var num_users = 1;
         console.log(enrolled_users);
-        await Course.updateOne({course_code: req.params.coursecode}, {users_enrolled: enrolled_users},
+        await Course.updateOne({course_code: req.session.current_course_code}, {users_enrolled: enrolled_users, no_enrolled: num_users},
             (err, numUpdated) =>{
                 if(err) return err;
                 console.log("User added to enroll list");
             });
-        delete req.session.users_enrolled;
+        //delete req.session.users_enrolled;
     }
     else{
         req.session.users_enrolled.push(req.session.username);
-        await Course.updateOne({course_code: req.session.current_course_code}, {users_enrolled: req.session.users_enrolled},
+        var num_users = req.session.users_enrolled.length;
+        await Course.updateOne({course_code: req.session.current_course_code}, {users_enrolled: req.session.users_enrolled, no_enrolled: num_users},
             (err, numUpdated) =>{
                 if(err) return err;
                 console.log("User added to enroll list");
             });
-        delete req.session.users_enrolled;
+        //delete req.session.users_enrolled;
     }
         
     }
     else{
         req.session.courses_enrolled.push(course[0].course_code);
-        var user_name = req.session.username;
+        //var user_name = req.session.username;
         await User.updateOne({username: req.session.username}, {enrolled_courses: req.session.courses_enrolled},
             (err, numUpdated) => {
                 if(err) return err;
@@ -159,23 +161,25 @@ router.post('/:coursecode', enrollLoginChecker, checkUniExclusive, checkCredits,
             );
         if(req.session.users_enrolled == null){
             var enrolled_users = [req.session.username];
-            await Course.updateOne({course_code: req.session.current_course_code}, {users_enrolled: enrolled_users},
+            var num_users = 1;
+            await Course.updateOne({course_code: req.session.current_course_code}, {users_enrolled: enrolled_users, no_enrolled: num_users},
                 (err, numUpdated) =>{
                     if(err) return err;
                     console.log("User added to enroll list");
                 });
-            delete req.session.users_enrolled;
+            //delete req.session.users_enrolled;
         }
         else{
             //console.log("Log before adding user to enroll list");
             //console.log(req.session);
             req.session.users_enrolled.push(req.session.username);
-            await Course.updateOne({course_code: req.session.current_course_code}, {users_enrolled: req.session.users_enrolled},
+            var num_users = req.session.users_enrolled.length;
+            await Course.updateOne({course_code: req.session.current_course_code}, {users_enrolled: req.session.users_enrolled, no_enrolled: num_users},
                 (err, numUpdated) =>{
                     if(err) return err;
                     console.log("User added to enroll list");
                 });
-           delete req.session.users_enrolled;
+           //delete req.session.users_enrolled;
         }
     }
     res.render('../views/course',{
@@ -196,10 +200,11 @@ router.post('/:coursecode/delete', enrollLoginChecker, async function(req, res){
     })*/
 
     //Deleting value from stored array.
-    var del_index_enrolled_users = req.session.enrolled_users.indexOf(req.session.username);
-    if(del_index > -1){
-        req.session.enrolled_users.splice(del_index_enrolled_users, 1);
+    var del_index_enrolled_users = req.session.users_enrolled.indexOf(req.session.username);
+    if(del_index_enrolled_users > -1){
+        req.session.users_enrolled.splice(del_index_enrolled_users, 1);
         }
+    //console.log(req.session.users_enrolled);
     var del_index = req.session.courses_enrolled.indexOf(req.params.coursecode);
     if(del_index > -1){
     req.session.courses_enrolled.splice(del_index, 1);
@@ -218,7 +223,8 @@ router.post('/:coursecode/delete', enrollLoginChecker, async function(req, res){
     //Update course enrolled users list.
     console.log("Console log at enrolled list delete.");
     console.log(req.session.users_enrolled);
-    await Course.updateOne({course_code: req.session.current_course_code}, {users_enrolled: req.session.enrolled_users},
+    var num_users = req.session.users_enrolled.length;
+    await Course.updateOne({course_code: req.session.current_course_code}, {users_enrolled: req.session.users_enrolled, no_enrolled: num_users},
             (err, numUpdated) =>{
                 if(err) return err;
                 console.log("User removed from enroll list");
