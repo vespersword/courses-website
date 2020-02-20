@@ -83,6 +83,10 @@ router.get('/:coursecode', async function(req, res){
     console.log(req.session.course_restrict);
     req.session.course_credits = course[0].credits;
 
+    //Saving enrolled users to session variable for use on this oage during POST. Deleted after posting.
+    req.session.users_enrolled = course[0].users_enrolled;
+    
+
     //console.log(course);
     res.render('../views/course',{
         session: req.session,
@@ -117,6 +121,24 @@ router.post('/:coursecode', enrollLoginChecker, checkUniExclusive, checkCredits,
                 console.log("Course added successfully in DB");
             }
             );
+    if(req.session.users_enrolled == null){
+        var enrolled_users = [req.session.username];
+        await Course.updateOne({course_code: req.params.coursecode}, {enrolled_users: enrolled_users},
+            (err, numUpdated) =>{
+                if(err) return err;
+                console.log("User added to enroll list");
+            });
+        delete req.session.users_enrolled;
+    }
+    else{
+        req.session.enrolled_users.push(req.session.username);
+        await Course.updateOne({course_code: req.params.coursecode}, {enrolled_users: enrolled_users},
+            (err, numUpdated) =>{
+                if(err) return err;
+                console.log("User added to enroll list");
+            });
+        delete req.session.users_enrolled;
+    }
         
     }
     else{
@@ -127,6 +149,24 @@ router.post('/:coursecode', enrollLoginChecker, checkUniExclusive, checkCredits,
                 console.log("Course added successfully in DB");
             }
             );
+        if(req.session.users_enrolled == null){
+            var enrolled_users = [req.session.username];
+            await Course.updateOne({course_code: req.params.coursecode}, {enrolled_users: enrolled_users},
+                (err, numUpdated) =>{
+                    if(err) return err;
+                    console.log("User added to enroll list");
+                });
+            delete req.session.users_enrolled;
+        }
+        else{
+            req.session.enrolled_users.push(req.session.username);
+            await Course.updateOne({course_code: req.params.coursecode}, {enrolled_users: enrolled_users},
+                (err, numUpdated) =>{
+                    if(err) return err;
+                    console.log("User added to enroll list");
+                });
+            delete req.session.users_enrolled;
+        }
     }
     res.render('../views/course',{
         session: req.session,
@@ -144,13 +184,20 @@ router.post('/:coursecode/delete', enrollLoginChecker, async function(req, res){
         if(err) return (err);
         return course;
     })*/
-    
+
+    //Deleting value from stored array.
+    var del_index_enrolled_users = req.session.enrolled_users.indexOf(req.session.username);
+    if(del_index > -1){
+        req.session.enrolled_users.splice(del_index_enrolled_users, 1);
+        }
     var del_index = req.session.courses_enrolled.indexOf(req.params.coursecode);
     if(del_index > -1){
     req.session.courses_enrolled.splice(del_index, 1);
     }
     var new_creds = req.session.reg_creds - req.session.course_credits;
     req.session.reg_creds = new_creds;
+
+    //Update user credits and courses list.
     await User.updateOne({username: req.session.username}, {enrolled_courses: req.session.courses_enrolled, reg_creds: new_creds},
         (err, numUpdated) => {
             if(err) return err;
@@ -158,6 +205,13 @@ router.post('/:coursecode/delete', enrollLoginChecker, async function(req, res){
         }
         );
 
+    //Update course enrolled users list.
+    await Course.updateOne({course_code: req.params.coursecode}, {enrolled_users: enrolled_users},
+            (err, numUpdated) =>{
+                if(err) return err;
+                console.log("User added to enroll list");
+            });
+    delete req.session.users_enrolled;
     res.redirect('/courses/'+req.params.coursecode);
 
     }
