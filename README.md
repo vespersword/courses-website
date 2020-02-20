@@ -2,8 +2,27 @@ Live demonstration: https://courses-website.herokuapp.com/
 This website is a mix between an open online course platform and a course platform from a college's point of view.
 
 <h2> Admin account details - Username: 'Admin' Password: 'admin' </h2>
+<h2> Account to test credit constraint when enrolling and university constraint(university of this account is VITC so try enrolling in Maths course MAT1002 which is for VITV only) <br>
+  Username: 'restrict_test' Password: 'password'
   
-<h1> This is a course registration website implemented with Express along with MongoDB. </h1>
+<h1> This is a course registration website implemented with Express along with MongoDB and PUG as a template engine. </h1>
+
+<h2> Implementation Details
+  <ul>
+    <li> <b> Promises and Async/Await: </b> <br>
+        These have been used everytime we do something with the database like retrieving data to load content on a page.
+    <li> <b> Middleware: </b> <br>
+      Middleware has been implemented everywhere we want to do some sort of contraint check. <br>
+      Some examples of the middleware implemented: <ul>
+      <li> Login Checker - To check if user has logged in. Used when trying to view user pages without being logged in. Also used when trying to enroll.
+        <li> University Constraint - Checks before enrollment if course is restricted or open and if restricted checks if user is allowed to enroll.
+          <li> Credit Checker - Checks credit count before enrolling if enrolling in a university course with credits. Doesn't allow you to enroll if credit count exceeds 27.
+      </ul>
+    <li> <b>PUG Conditionals</b>: <br>
+      PUG conditionals and loops have been used throughout the website to render data easily. Loops usually used to display data from database and conditionals to show or hide data based on type of user and if logged in or not.
+    <li><b> MongoDB</b>: <br>
+      Two models have been implemented - Course and User.
+      
 
 <h2> Key Features </h2>
 <ul>
