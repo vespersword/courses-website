@@ -41,28 +41,59 @@ var checkCredits = (req, res, next) => {
 }
 
 /* GET courses page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
   //console.log("Session on index");
   //console.log(req.session);
-    var find_promise = Course.find({}, (err, courses)=>{
+    try{
+    var maths = await Course.find({course_category: "MAT"}, (err, courses)=>{
         if(err) return (err);
-        //console.log(course);
         return courses;
-    })
-    find_promise
-    .then((courses)=>{
-        //console.log(courses);
-        //console.log(courses[0].course_name);
-        res.render('../views/courses',{
-            session: req.session,
-            course_list: courses
-        });
-        
-    })
-    .catch((err)=> {
+    });
+    var physics = await Course.find({course_category: "PHY"}, (err, courses)=>{
+        if(err) return (err);
+        return courses;
+    });
+    var chemistry = await Course.find({course_category: "CHY"}, (err, courses)=>{
+        if(err) return (err);
+        return courses;
+    });
+    var computers = await Course.find({course_category: "CSE"}, (err, courses)=>{
+        if(err) return (err);
+        return courses;
+    });
+    var humanities = await Course.find({course_category: "HUM"}, (err, courses)=>{
+        if(err) return (err);
+        return courses;
+    });
+
+    var others = await Course.find({course_category: "OTHER"}, (err, courses)=>{
+        if(err) return (err);
+        return courses;
+    });
+
+    var popular = await Course.find({}, {sort: '-no_views'}, (err, course)=>{
+        if(err) return err;
+        return course;
+    });
+
+    console.log(popular);
+
+    res.render('../views/courses',{
+        session: req.session,
+        maths: maths,
+        physics: physics,
+        chemistry: chemistry,
+        computers: computers,
+        humanities: humanities,
+        others: others,
+        popular: popular
+    });
+    }
+    catch(err){
         console.log(err)
-        res.redirect('/');
-    })
+        res.redirect('back');
+    };
+});
 
 router.get('/:coursecode', async function(req, res){
     try{
@@ -239,8 +270,6 @@ router.post('/:coursecode/delete', enrollLoginChecker, async function(req, res){
 
     }
     catch(e){console.log(e)}
-})
-
 });
 
 module.exports = router;

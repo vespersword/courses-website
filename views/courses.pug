@@ -10,7 +10,7 @@ html
                 img(class='logo-img' src="/images/book.svg" alt="This is my Logo")
                 div(class='logo'): h4 Coursem
             div(class='search-bar-container')
-                div(class='search-bar'): input(type=text placeholder="Search for your courses here...")
+                div(class='search-bar'): input(type="hidden" placeholder="Search for your courses here...")
             nav
                 ul(class='nav-links')
                     a(class='nav-link' href="./courses"): li Courses
@@ -23,16 +23,14 @@ html
                                 div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
                                     a(class="dropdown-item" href="./login") Login
                                     a(class="dropdown-item" href="./register") Register
-                                    a(class="dropdown-item" href="#") Extra
                     else
                         li(class='nav-link')
                             div(class="dropdown dropdown-menu-right")
                                 button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{user}
                                 div(class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton")
-                                    a(class="dropdown-item" href="./users/"+user) Signed in as #{user}
+                                    a(class="dropdown-item" href="./users/"+user) #{user}'s Page
                                     div(class="dropdown-divider")
                                     a(class="dropdown-item" href="./logout") Logout
-                                    a(class="dropdown-item" href="#") Extra
                                     if session.user_type=="Admin"
                                         div(class="dropdown-divider")
                                         a(class="dropdown-item" href="/add-course") Add Courses
@@ -42,16 +40,19 @@ html
             .row
                 .col-3
                     #myList.list-group(role='tablist')
-                        a.list-group-item.list-group-item-action.active(data-toggle='list', href='#home', role='tab') Maths
-                        a.list-group-item.list-group-item-action(data-toggle='list', href='#profile', role='tab') Physics
-                        a.list-group-item.list-group-item-action(data-toggle='list', href='#messages', role='tab') Computer Science
-                        a.list-group-item.list-group-item-action(data-toggle='list', href='#settings', role='tab') Other
+                        a.list-group-item.list-group-item-action.active(data-toggle='list', href='#maths', role='tab') Maths
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#physics', role='tab') Physics
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#chemistry', role='tab') Chemistry
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#cse', role='tab') Computer Science
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#hum', role='tab') Humanities
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#other', role='tab') Other
+                        
                     // Tab panes
                 .col-8
                     .tab-content
-                        #home.tab-pane.active(role='tabpanel') This is 1
+                        #maths.tab-pane.active(role='tabpanel') Maths Courses
                             div(class="card-deck" )
-                            each course in course_list
+                            each course in maths
                                 .card.text-white.bg-primary.mb-3(style='max-width: 23rem;')
                                     .card-header #{course.course_code}
                                         .card-body
@@ -59,9 +60,57 @@ html
                                             p.card-text.text-white 
                                             | #{course.course_description}
                                             a(href="/courses/"+course.course_code class="btn btn-secondary") View Course Page
-                        #profile.tab-pane(role='tabpanel') This is 2
-                        #messages.tab-pane(role='tabpanel') This is 3
-                        #settings.tab-pane(role='tabpanel') This is 4
+                        #physics.tab-pane(role='tabpanel') Physics Courses
+                            div(class="card-deck" )
+                            each course in physics
+                                .card.text-white.bg-danger.mb-3(style='max-width: 23rem;')
+                                    .card-header #{course.course_code}
+                                        .card-body
+                                            h5.card-title #{course.course_name}
+                                            p.card-text.text-white 
+                                            | #{course.course_description}
+                                            a(href="/courses/"+course.course_code class="btn btn-secondary") View Course Page
+                        #chemistry.tab-pane(role='tabpanel') Chemistry Courses
+                            div(class="card-deck" )
+                            each course in chemistry
+                                .card.text-white.bg-success.mb-3(style='max-width: 23rem;')
+                                    .card-header #{course.course_code}
+                                        .card-body
+                                            h5.card-title #{course.course_name}
+                                            p.card-text.text-white 
+                                            | #{course.course_description}
+                                            a(href="/courses/"+course.course_code class="btn btn-secondary") View Course Page
+                        #cse.tab-pane(role='tabpanel') Computer Science Courses
+                            div(class="card-deck" )
+                            each course in computers
+                                .card.text-white.bg-secondary.mb-3(style='max-width: 23rem;')
+                                    .card-header #{course.course_code}
+                                        .card-body
+                                            h5.card-title #{course.course_name}
+                                            p.card-text.text-white 
+                                            | #{course.course_description}
+                                            a(href="/courses/"+course.course_code class="btn btn-secondary") View Course Page
+                        #hum.tab-pane(role='tabpanel') Humanities Courses
+                            div(class="card-deck" )
+                            each course in humanities
+                                .card.text-white.bg-warning.mb-3(style='max-width: 23rem;')
+                                    .card-header #{course.course_code}
+                                        .card-body
+                                            h5.card-title #{course.course_name}
+                                            p.card-text.text-white 
+                                            | #{course.course_description}
+                                            a(href="/courses/"+course.course_code class="btn btn-secondary") View Course Page
+                        #other.tab-pane(role='tabpanel') Other Courses
+                            div(class="card-deck" )
+                            each course in others
+                                .card.text-white.bg-info.mb-3(style='max-width: 23rem;')
+                                    .card-header #{course.course_code}
+                                        .card-body
+                                            h5.card-title #{course.course_name}
+                                            p.card-text.text-white 
+                                            | #{course.course_description}
+                                            a(href="/courses/"+course.course_code class="btn btn-secondary") View Course Page
+                        
 
 
     script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")
