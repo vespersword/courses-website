@@ -54,9 +54,9 @@ router.post('/', (req, res) => {
                 delete req.session.page_load_instructors;
             }
             else if(data=="New"){
-                var status = false;
+                var status = "false";
                 if(req.body.restrict==1){
-                    status = true;
+                    status = "true";
                 }
                 const course = new Course({
                     course_name: req.body.course_name,

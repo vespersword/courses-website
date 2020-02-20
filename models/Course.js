@@ -32,8 +32,8 @@ const CourseSchema = mongoose.Schema({
         default: null
     },
     uni_exclusive:{
-        type: Boolean,
-        default: false
+        type: String,
+        default: "false"
     },
     content: {
         type: String,
