@@ -5,7 +5,7 @@ This website is a mix between an open online course platform and a course platfo
 <h2> Account to test credit constraint when enrolling and university constraint(university of this account is VITC so try enrolling in Maths course MAT1002 which is for VITV only) <br>
   Username: 'restrict_test' Password: 'password'
   
-<h1> This is a course registration website implemented with Express along with MongoDB and PUG as a template engine. </h1>
+<h1> This is a course registration website implemented with Express along with mongoDB Atlas and PUG as a template engine. </h1>
 
 <h2> Implementation Details </h2>
   <ul>
