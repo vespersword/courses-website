@@ -73,13 +73,18 @@ html
                     select(class="form-control" id="university" name="university")
                         option(value="No University") No University
                         option(value="VITC") VIT Chennai
-                        option(value="VITC") VIT Vellore
+                        option(value="VITV") VIT Vellore
+
+                div(class="form-group")
+                    label(class="col-md-4 control-label" for="textinput") Number of Credits
+                    div(class="col-md-4")
+                    input(id="textinput" name="credits" type="number" placeholder="Enter number of credits" min=0 max=4 class="form-control input-md" required value=0)
 
                 div(class="form-group")
                     div(class="col-md-4")
                     div(class="form-check")
-                        label(class="col-md-4 control-label" for="checkboxes") Restrict enrollment to accounts affiliated with university.
-                        input(class="form-control-lg" type="checkbox" name="checkboxes" id="checkboxes" value="1")
+                        label(class="col-md-4 control-label" for="restrict") Restrict enrollment to accounts affiliated with university.
+                        input(class="form-control-lg" type="checkbox" name="restrict" id="restrict" value="1")
 
                 div(class="form-group")
                     label(class="col-md-4 control-label" for="textarea") Course Description

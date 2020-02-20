@@ -55,7 +55,15 @@ html
                     else
                         p(class="lead")
                             | #{course[0].description}
-                            | Instructed by #{instructor[0].name}
+                            br
+                            b Instructor: 
+                            a(href="#")|#{instructor[0].name}
+                            br
+                            if course[0].university != "No University"
+                                | A course by #{course[0].university}
+                                br
+                                | Number of Credits: #{course[0].credits}
+                            br
                             | Click below to enroll
                             form(class="display-6" method="post" action="/courses/"+course[0].course_code)
                                 input(type="hidden" name="enroll_course_code" value=course[0].course_code)

@@ -32,7 +32,7 @@ const CourseSchema = mongoose.Schema({
         default: null
     },
     uni_exclusive:{
-        type: String,
+        type: Boolean,
         default: false
     },
     content: {

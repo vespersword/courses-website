@@ -54,13 +54,20 @@ router.post('/', (req, res) => {
                 delete req.session.page_load_instructors;
             }
             else if(data=="New"){
+                var status = false;
+                if(req.body.restrict==1){
+                    status = true;
+                }
                 const course = new Course({
                     course_name: req.body.course_name,
                     course_code: req.body.course_code,
                     course_type: req.body.course_type,
                     course_category: req.body.course_category,
                     description: req.body.description,
-                    instructor: req.body.instructor
+                    instructor: req.body.instructor,
+                    university: req.body.university,
+                    uni_exclusive: status,
+                    credits: req.body.credits
                 });
                 course.save((err, user) =>{
                     if(err){
