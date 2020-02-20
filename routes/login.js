@@ -8,8 +8,10 @@ router.get('/',  function(req, res, next) {
     res.render('../views/login', { 
         message: 'Enter your details',
         data: 'This is data',
-        session: req.session
+        session: req.session,
+        error: req.session.error
    });
+   delete req.session.error;
    //console.log(req.session);
 });
 

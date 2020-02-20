@@ -78,6 +78,11 @@ router.get('/:coursecode', async function(req, res){
         if(err) return(err);
         return user;
     });
+    //Increase page view count
+    await Course.updateOne({username: req.params.coursecode}, {$inc:{no_views: 1}}, (err, suc)=>{
+        if(err) return err;
+        return console.log("Page view count increased for "+req.params.coursecode);
+    });
     //Set university in session variable for the page.
     req.session.course_university = course[0].university;
     req.session.current_course_code = coursecode;

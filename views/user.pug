@@ -38,15 +38,34 @@ html
                                         a(class="dropdown-item" href="/add-course") Add Courses
 
         main
-            h1 Below we have a registered course list,
-            div(class="card-deck")
-                each course in course_list
-                    .card.text-white.bg-primary.mb-3(style='max-width: 20rem;')
-                        .card-header #{course.course_code}
-                            .card-body
-                                h5.card-title #{course.course_name}
-                                p.card-text.text-white #{course.course_description}
-                                a(href="/courses/"+course.course_code class="btn btn-primary") View Course Page
+            h1 Below is our user page,
+            .row
+                .col-3
+                    #myList.list-group(role='tablist')
+                        a.list-group-item.list-group-item-action.active(data-toggle='list', href='#home', role='tab') My Courses
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#profile', role='tab') My Details
+                        if session.username
+                            if session.userpage_usertype == "Instructor"
+                                a.list-group-item.list-group-item-action(data-toggle='list', href='#students', role='tab') My Students
+                            if session.userpage_username == session.username
+                                a.list-group-item.list-group-item-action(data-toggle='list', href='#messages', role='tab') Edit Details
+                                a.list-group-item.list-group-item-action(data-toggle='list', href='#settings', role='tab') Other
+                        // Tab panes
+                .col-8
+                    .tab-content
+                        #home.tab-pane.active(role='tabpanel') This is 1
+                            div(class="card-deck")
+                                each course in course_list
+                                    .card.text-white.bg-primary.mb-3(style='max-width: 20rem;')
+                                        .card-header #{course.course_code}
+                                            .card-body
+                                                h5.card-title #{course.course_name}
+                                                p.card-text.text-white #{course.course_description}
+                                                a(href="/courses/"+course.course_code class="btn btn-primary") View Course Page
+                        #profile.tab-pane(role='tabpanel') This is 2
+                        #messages.tab-pane(role='tabpanel') This is 3
+                        #settings.tab-pane(role='tabpanel') This is 4
+            
 
 
 

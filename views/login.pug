@@ -34,8 +34,7 @@ html
                                     a(class="dropdown-item" href="./logout") Logout
                                     a(class="dropdown-item" href="#") Extra
         h1 This is the login form
-        p #{message}
-        p #{data}
+        p #{session.error}
         a(href="./register")
             p Click here if you don't have an account
         form(action = "./login" method="post")
