@@ -16,7 +16,7 @@ html
                     a(class='nav-link' href="./courses"): li Courses
                     a(class='nav-link' href="./users"): li Users
                     li(class='nav-link') 
-                        div(class="dropdown")
+                        div(class="dropdown dropdown-menu-right")
                             button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Login/Register
                             div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
                                 a(class="dropdown-item" href="./login") Login
@@ -24,19 +24,34 @@ html
                                 a(class="dropdown-item" href="#") Extra
         h1 This is the Register form
         p #{message}
-        p #{data}
-        form(action="./register" method="post" oninput='re_pass.setCustomValidity(re_pass.value != password.value ? "Passwords do not match." : "")')
-            p
-            label(for="username") Username:
-            input(id="username" name="name" type='text' required)
-            p
-            label(for="password1") Password:
-            input(id="password1" type='password' required name='password')
-            p
-            label(for="password2") Confirm password:
-            input(id="password2" type='password' name='re_pass')
-            p
-            input(type='submit' value="Create account")
+        div(class="d-flex justify-content-center")
+            form(action="./register" method="post" oninput='re_pass.setCustomValidity(re_pass.value != password.value ? "Passwords do not match." : "")')
+                p
+                label(for="username") Username:
+                input(class="form-control" id="username" name="name" type='text' required)
+                p
+                label(for="account_type") Account Type:
+                select(class="form-control" id="account_type" name="account_type")
+                    option(value="General") General
+                    option(value="Instructor") Instructor
+                p
+                label(for="university") University:
+                select(class="form-control" id="university" name="university")
+                    option(value="No University") No University
+                    option(value="Uni 1") University 1
+                    option(value="Uni 2") University 2
+                span(class="help-block") Select your affiliation
+                p
+                label(for="real_name") Name:
+                input(class="form-control" id="real_name" required name="real_name" type="text" placeholder="Enter your name here.")
+                p
+                label(for="password1") Password:
+                input(class="form-control" id="password1" type='password' required name='password')
+                p
+                label(for="password2") Confirm password:
+                input(class="form-control" id="password2" type='password' name='re_pass')
+                p
+                input(type='submit' value="Create account")
     
     //script(src="/scripts/reg-form-val.js")
     script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")

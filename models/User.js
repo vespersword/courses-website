@@ -11,10 +11,10 @@ const UserSchema = mongoose.Schema({
     },
     name: {
         type: String,
-        required: false
+        required: true
     },
-    age: {
-        type: Number,
+    university: {
+        type: String,
         required: false
     },
     user_type: {

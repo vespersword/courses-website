@@ -40,7 +40,7 @@ html
         main
             h1 Below we have a course list,
             .row
-                .col-4
+                .col-3
                     #myList.list-group(role='tablist')
                         a.list-group-item.list-group-item-action.active(data-toggle='list', href='#home', role='tab') Maths
                         a.list-group-item.list-group-item-action(data-toggle='list', href='#profile', role='tab') Physics
@@ -50,7 +50,7 @@ html
                 .col-8
                     .tab-content
                         #home.tab-pane.active(role='tabpanel') This is 1
-                            div(class="card-deck")
+                            div(class="card-deck" )
                             each course in course_list
                                 .card.text-white.bg-primary.mb-3(style='max-width: 20rem;')
                                     .card-header #{course.course_code}

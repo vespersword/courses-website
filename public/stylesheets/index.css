@@ -79,3 +79,7 @@ a.logo-a{
     /*text-shadow: 1px 1px black;
     filter: grayscale(40%);*/
 }
+
+.card{
+    display: inline-block;
+}

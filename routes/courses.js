@@ -111,7 +111,7 @@ router.post('/:coursecode/delete', enrollLoginChecker, async function(req, res){
         }
         );
 
-    res.redirect('/'+req.params.coursecode);
+    res.redirect('/courses/'+req.params.coursecode);
 
     }
     catch(e){console.log(e)}
