@@ -27,13 +27,37 @@ const CourseSchema = mongoose.Schema({
         type: String,
         default: null
     },
+    university: {
+        type: String,
+        default: null
+    },
+    uni_exclusive:{
+        type: String,
+        default: "false"
+    },
     content: {
         type: String,
         default: null
     },
     users_enrolled: {
-        type: String,
+        type: [String],
         default: null
+    },
+    no_enrolled:{
+        type: Number,
+        default: 0
+    },
+    rating:{
+        type: Number,
+        default: null
+    },
+    no_views:{
+        type: Number,
+        default: 0
+    },
+    credits:{
+        type: Number,
+        default: 0
     }
 })
 

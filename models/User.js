@@ -11,10 +11,10 @@ const UserSchema = mongoose.Schema({
     },
     name: {
         type: String,
-        required: false
+        required: true
     },
-    age: {
-        type: Number,
+    university: {
+        type: String,
         required: false
     },
     user_type: {
@@ -24,6 +24,14 @@ const UserSchema = mongoose.Schema({
     enrolled_courses: {
         type: [String],
         default: null
+    },
+    no_views:{
+        type: Number,
+        default: 0
+    },
+    reg_creds:{
+        type: Number,
+        default: 0
     }
 })
 

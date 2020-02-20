@@ -8,8 +8,10 @@ router.get('/',  function(req, res, next) {
     res.render('../views/login', { 
         message: 'Enter your details',
         data: 'This is data',
-        session: req.session
+        session: req.session,
+        error: req.session.error
    });
+   delete req.session.error;
    //console.log(req.session);
 });
 
@@ -44,6 +46,8 @@ router.post('/', (req, res) =>{
                 req.session.username = data.username;
                 req.session.user_type = data.user_type;
                 req.session.courses_enrolled = data.enrolled_courses;
+                req.session.user_university = data.university;
+                req.session.reg_creds = data.reg_creds;
                 //console.log(req.session.courses_enrolled);
                 //req.session.courses_enrolled.push("test");
                 res.redirect('/');

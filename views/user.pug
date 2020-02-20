@@ -18,7 +18,7 @@ html
                     -var user = session.username
                     if !user
                         li(class='nav-link') 
-                            div(class="dropdown")
+                            div(class="dropdown dropdown-menu-right")
                                 button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Login/Register
                                 div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
                                     a(class="dropdown-item" href="../login") Login
@@ -26,9 +26,9 @@ html
                                     a(class="dropdown-item" href="#") Extra
                     else
                         li(class='nav-link')
-                            div(class="dropdown")
+                            div(class="dropdown dropdown-menu-right")
                                 button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{user}
-                                div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+                                div(class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton")
                                     a(class="dropdown-item" href="../users/"+user) Signed in as #{user}
                                     div(class="dropdown-divider")
                                     a(class="dropdown-item" href="../logout") Logout
@@ -38,17 +38,73 @@ html
                                         a(class="dropdown-item" href="/add-course") Add Courses
 
         main
-            h1 Below we have a registered course list,
-            div(class="card-deck")
-                each course in course_list
-                    div(class = "col-md-3")
-                        div(class="card" style="width: 18rem;, object-fit: cover")
-                            img(class="card-img-top" src="/images/Maths_placeholder.png" alt="Card image cap" style="width: 100%")
-                            div(class="card-body")
-                                h5(class="card-title") #{course.course_name}
-                                p(class="card-text") #{course.description}
-                                a(href="/courses/"+course.course_code class="btn btn-primary") View Course Page
+            h1 Below is our user page,
+            .row
+                .col-3
+                    #myList.list-group(role='tablist')
+                        a.list-group-item.list-group-item-action.active(data-toggle='list', href='#home', role='tab') My Courses
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#profile', role='tab') My Details
+                        if session.username
+                            if session.userpage_usertype == "Instructor"
+                                a.list-group-item.list-group-item-action(data-toggle='list', href='#students', role='tab') My Students
+                            if session.userpage_username == session.username
+                                a.list-group-item.list-group-item-action(data-toggle='list', href='#edit', role='tab') Edit Details
+                        // Tab panes
+                .col-8
+                    .tab-content
+                        #home.tab-pane.active(role='tabpanel') These are my courses
+                            div(class="card-deck")
+                                each course in course_list
+                                    .card.text-white.bg-primary.mb-3(style='max-width: 20rem;')
+                                        .card-header #{course.course_code}
+                                            .card-body
+                                                h5.card-title #{course.course_name}
+                                                p.card-text.text-white #{course.course_description}
+                                                a(href="/courses/"+course.course_code class="btn btn-primary") View Course Page
+                        #profile.tab-pane(role='tabpanel') These are my details
+                            br
+                            h4 Username: #{userpage.username}
+                            br
+                            h4 Name: #{userpage.name}
+                            br
+                            h4 University: #{userpage.university}
+                            br
+                            h4 User Type: #{userpage.user_type}
+                            br
+                            h4 User Page Views: #{userpage.no_views}
+                            br
+                            -var page_views = parseInt(userpage.reg_creds/2)
+                            h4 Registered Credits: #{page_views} 
+                        #students.tab-pane(role='tabpanel') These are my students from all the courses I take.
+                            div(class="card-deck")
+                                each course in courses_taught
+                                    each student in course.users_enrolled
+                                        .card.text-white.bg-primary.mb-3(style='max-width: 20rem;')
+                                            .card-header #{student}
+                                                .card-body
+                                                    h5.card-title #{course.course_name}
+                                                    a(href="/users/"+student class="btn btn-primary") View User Page
+
+                        #edit.tab-pane(role='tabpanel') This is 4
+                            div(class="d-flex justify-content-center")
+                                form(action="./"+userpage.username method="post")
+                                    p
+                                    label(for="university") University:
+                                    select(class="form-control" id="university" name="university")
+                                        option(value="No University") No University
+                                        option(value="VITC") VIT Chennai
+                                        option(value="VITV") VIT Vellore
+                                    span(class="help-block") Select your affiliation
+                                    p
+                                    label(for="real_name") Name:
+                                    input(class="form-control" id="real_name" required name="real_name" type="text" placeholder="Enter your name here." value=userpage.name)
+                                    p
+                                    label(for="password1") New Password(default value is old password):
+                                    input(class="form-control" id="password1" type='password' name='password' value=userpage.password)
+                                    p
+                                    input(type='submit' value="Submit Changes")
             
+
 
 
 

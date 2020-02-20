@@ -1,0 +1,85 @@
+html
+    head
+        link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+        title Welcome to Courses!
+        style
+            include ../public/stylesheets/index.css
+    body
+        header
+            a(href='/' class='logo-a'): div(class='logo-container')
+                img(class='logo-img' src="/images/book.svg" alt="This is my Logo")
+                div(class='logo'): h4 Coursem
+            div(class='search-bar-container')
+                div(class='search-bar'): input(type=text placeholder="Search for your courses here...")
+            nav
+                ul(class='nav-links')
+                    a(class='nav-link' href="./courses"): li Courses
+                    a(class='nav-link' href="./users"): li Users
+                    -var user = session.username
+                    if !user
+                        li(class='nav-link') 
+                            div(class="dropdown dropdown-menu-right")
+                                button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Login/Register
+                                div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+                                    a(class="dropdown-item" href="./login") Login
+                                    a(class="dropdown-item" href="./register") Register
+                                    a(class="dropdown-item" href="#") Extra
+                    else
+                        li(class='nav-link')
+                            div(class="dropdown dropdown-menu-right")
+                                button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{user}
+                                div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+                                    a(class="dropdown-item" href="./users/"+user) Signed in as #{user}
+                                    div(class="dropdown-divider")
+                                    a(class="dropdown-item" href="./logout") Logout
+                                    a(class="dropdown-item" href="#") Extra
+                                    if session.user_type=="Admin"
+                                        div(class="dropdown-divider")
+                                        a(class="dropdown-item" href="/add-course") Add Courses
+
+        main
+            h1 Below we have a user list,
+
+            .row
+                .col-3
+                    #myList.list-group(role='tablist')
+                        a.list-group-item.list-group-item-action.active(data-toggle='list', href='#home', role='tab') General
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#profile', role='tab') Instructors
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#messages', role='tab') Computer Science
+                        a.list-group-item.list-group-item-action(data-toggle='list', href='#settings', role='tab') Other
+                    // Tab panes
+                .col-8
+                    .tab-content
+                        #home.tab-pane.active(role='tabpanel') This is 1
+                            div(class="card-deck" )
+                            each student in student_list
+                                .card.text-white.bg-primary.mb-3(style='max-width: 23rem;')
+                                    .card-header #{student.name}
+                                        .card-body
+                                            h5.card-title #{student.username}
+                                            p.card-text.text-white 
+                                            | #{student.name}
+                                            br
+                                            a(href="/users/"+student.username class="btn btn-secondary") View User Page
+                        #profile.tab-pane(role='tabpanel') This is 2
+                            div(class="card-deck" )
+                            each teacher in instructor_list
+                                .card.text-white.bg-primary.mb-3(style='max-width: 23rem;')
+                                    .card-header #{teacher.name}
+                                        .card-body
+                                            h5.card-title #{teacher.username}
+                                            p.card-text.text-white 
+                                            | #{teacher.username}
+                                            br
+                                            a(href="/users/"+teacher.username class="btn btn-secondary") View User Page
+                        #messages.tab-pane(role='tabpanel') This is 3
+                        #settings.tab-pane(role='tabpanel') This is 4
+
+                    
+                                        
+                        
+
+
+    script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js", integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6", crossorigin="anonymous")

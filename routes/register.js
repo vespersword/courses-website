@@ -12,12 +12,10 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res) => {
     //console.log(req.body);
     var promise = new Promise(function(resolve, reject) {
-        // do a thing, possibly async, then…
         var uname = req.body.name;
         User.findOne({username: uname}, (err, usr) =>{
         if(err) return reject(err);
         if(usr){
-            //console.log("Duplicate User");
             //message1 = "Username is already taken.";
             resolve("Duplicate");
         }
@@ -38,7 +36,10 @@ router.post('/', (req, res) => {
             else if(data=="New"){
                 const user = new User({
                     username: req.body.name,
-                    password: req.body.password
+                    password: req.body.password,
+                    name: req.body.real_name,
+                    university: req.body.university,
+                    user_type: req.body.account_type
                 });
                 user.save((err, user) =>{
                     if(err){

@@ -3,7 +3,7 @@ body{
 }
 
 .logo-img{
-    height: 100;
+    height: 90;
     width: 100;
 }
 
@@ -16,9 +16,9 @@ header{
     display: flex;
     /*background: rgb(133, 187, 231);*/
     background: linear-gradient(to bottom, #FED066 0%, #FDB73D 100%);
-    width: 90%;
+    width: 100%;
     margin: auto;
-    height: 10vh;
+    height: 9vh;
     align-items: center;
 }
 
@@ -28,32 +28,82 @@ header{
 
 .search-bar-container{
     /*background: rgb(62, 212, 36);*/
-    flex: 2;
+    flex: 8;
 }
 .search-bar{
     width: 100%;
 }
 .logo-container{
-    flex: 1;
+    /*background: brown;*/
+    flex: 2;
     align-items: center;
 }
 .logo{
-    font-weight: 400;
-    margin: 5px;
+    font-weight: bold;
+    margin: 10px;
 }
 nav{
     /*background: rgb(219, 126, 50);*/
-    flex: 4;
+    flex: 1;
 }
 .nav-links{
-    justify-content: space-around;
+    justify-content: right;
     list-style: none;
+    align-items: center;
+
 }
 a.logo-a{
     text-decoration: none;
 }
+
 .nav-link{
     font-size: 18px;
-    color: lightslategray;
+    color: rgb(1, 33, 65);
     text-decoration: none;
 }
+
+.nav-link:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+.jumbotron{
+    background-image: url("../images/home_jumbo.png");
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.3)
+      ), url("../images/home_jumbo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*text-shadow: 1px 1px black;
+    filter: grayscale(40%);*/
+}
+
+.card{
+    display: inline-block;
+}
+
+.form-group{
+    max-width: 50%;
+}
+
+.card-user {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  
+  /* On mouse-over, add a deeper shadow */
+  .card-user:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+  .mycard-container{
+      display: flex;
+  }
+  
+  /* Add some padding inside the card container */
+  .user-container {
+    padding: 2px 16px;
+  }

@@ -4,13 +4,13 @@ html
         title Welcome to Courses!
         style
             include ../public/stylesheets/index.css
-    body
+    body   
         header
             a(href='/' class='logo-a'): div(class='logo-container')
                 img(class='logo-img' src="/images/book.svg" alt="This is my Logo")
                 div(class='logo'): h4 Coursem
             div(class='search-bar-container')
-                div(class='search-bar'): input(type=text placeholder="Search for your courses here...")
+                div(class='search-bar'): input(type="text" placeholder="Search for your courses here...")
             nav
                 ul(class='nav-links')
                     a(class='nav-link' href="./courses"): li Courses
@@ -18,17 +18,17 @@ html
                     -var user = session.username
                     if !user
                         li(class='nav-link') 
-                            div(class="dropdown")
+                            div(class="dropdown dropdown-menu-right")
                                 button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Login/Register
-                                div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+                                div(class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton")
                                     a(class="dropdown-item" href="./login") Login
                                     a(class="dropdown-item" href="./register") Register
                                     a(class="dropdown-item" href="#") Extra
                     else
                         li(class='nav-link')
-                            div(class="dropdown")
+                            div(class="dropdown dropdown-menu-right")
                                 button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{user}
-                                div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+                                div(class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton")
                                     a(class="dropdown-item" href="./users/"+user) Signed in as #{user}
                                     div(class="dropdown-divider")
                                     a(class="dropdown-item" href="./logout") Logout
@@ -36,10 +36,41 @@ html
                                     if session.user_type=="Admin"
                                         div(class="dropdown-divider")
                                         a(class="dropdown-item" href="/add-course") Add Courses
+                                        a(class="dropdown-item" href="/delete-course") Delete Courses
 
         main
-            h1 Welcome to Courses.
-        
+            div(class="jumbotron card card-image jumbotron-fluid")
+                div(class="text-white text-center py-5 px-4")
+                    h1(class="card-title h1-responsive pt-3 mb-5 font-bold" style="font-size: 10vh;"): strong Welcome to Coursem!
+                    div(class="row d-flex justify-content-center")
+                        div(class="col-xl-7 pb-2")
+                            h2: p(class="mx-5 mb-5") A platform where you can undergo training and enroll yourself in a variety of world class courses from various departments.
+                    hr(class="my-4" style="border: 1px solid white")
+                    
+                    div(class="pt-2")
+                        a(class="btn btn-lg" style="background: red;" href="./login") Login
+                        a(class="btn btn-lg" style="background: grey;" href="./register") Register
+            
+            div(class="container")
+                div(class="text-center"): h3 Achieve your dreams
+                div(class="row")
+                    div(class="col-md-4")
+                        h4 Get career ready
+                        p Donec id elit non mi porta gravida at eget metus.
+                        |Donec id elit non mi porta gravida at eget metus. 
+                        |Donec id elit non mi porta gravida at eget metus. 
+                        |Donec id elit non mi porta gravida at eget metus. 
+                    div(class="col-md-4")
+                        h4 Learn from the best teachers
+                        p Donec id elit non mi porta gravida at eget metus.
+                        | Donec id elit non mi porta gravida at eget metus. 
+                        | Donec id elit non mi porta gravida at eget metus. 
+                        | Donec id elit non mi porta gravida at eget metus. 
+                    div(class="col-md-4")
+                        h4 Get the best skill development
+                        p Donec id elit non mi porta gravida at eget metus. 
+                hr
+                            
 
     script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")
     script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")

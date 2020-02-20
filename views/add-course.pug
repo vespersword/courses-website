@@ -18,7 +18,7 @@ html
                     -var user = session.username
                     if !user
                         li(class='nav-link') 
-                            div(class="dropdown")
+                            div(class="dropdown dropdown-menu-right")
                                 button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Login/Register
                                 div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
                                     a(class="dropdown-item" href="./login") Login
@@ -26,10 +26,10 @@ html
                                     a(class="dropdown-item" href="#") Extra
                     else
                         li(class='nav-link')
-                            div(class="dropdown")
+                            div(class="dropdown dropdown-menu-right")
                                 button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{user}
-                                div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
-                                    a(class="dropdown-item" href="./users/#{user}") Signed in as #{user}
+                                div(class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton")
+                                    a(class="dropdown-item" href="./users/"+user) Signed in as #{user}
                                     div(class="dropdown-divider")
                                     a(class="dropdown-item" href="./logout") Logout
                                     a(class="dropdown-item" href="#") Extra
@@ -53,23 +53,44 @@ html
                     input(id="textinput" name="course_code" type="text" placeholder="Enter course code" class="form-control input-md" required="")
 
                 div(class="form-group")
-                    label(class="col-md-4 control-label" for="textinput") Course Category
-                    div(class="col-md-4")
-                    input(id="textinput" name="course_category" type="text" placeholder="Enter course category" class="form-control input-md" required="")
+                    label(class="col-md-4 control-label" for="category") Course Category:
+                    select(class="form-control" id="category" name="course_category")
+                        option(value="MAT") Mathematics
+                        option(value="PHY") Physics
+                        option(value="CHY") Chemistry
+                        option(value="CSE") Computer Science
+                        option(value="HUM") Humanities
+                        option(value="OTHER") Other
 
                 div(class="form-group")
-                    label(class="col-md-4 control-label" for="selectbasic") Course Type
-                    div(class="col-md-2")
-                        select(id="selectbasic" name="course_type" class="form-control")
-                            option(value="General") General
-                            option(value="College") College
+                    label(class="col-md-4 control-label" for="instructor") Instructor:
+                    select(class="form-control" id="instructor" name="instructor")
+                        each instructor in instructor_list
+                            option(value=instructor.username) #{instructor.name}
+
+                div(class="form-group")
+                    label(class="col-md-4 control-label" for="university") University:
+                    select(class="form-control" id="university" name="university")
+                        option(value="No University") No University
+                        option(value="VITC") VIT Chennai
+                        option(value="VITV") VIT Vellore
+
+                div(class="form-group")
+                    label(class="col-md-4 control-label" for="textinput") Number of Credits
+                    div(class="col-md-4")
+                    input(id="textinput" name="credits" type="number" placeholder="Enter number of credits" min=0 max=4 class="form-control input-md" required value=0)
+
+                div(class="form-group")
+                    div(class="col-md-4")
+                    div(class="form-check")
+                        label(class="col-md-4 control-label" for="restrict") Restrict enrollment to accounts affiliated with university.
+                        input(class="form-control-lg" type="checkbox" name="restrict" id="restrict" value="1")
 
                 div(class="form-group")
                     label(class="col-md-4 control-label" for="textarea") Course Description
                     div(class="col-md-4")             
                         textarea(class="form-control" id="textarea" name="description")
     
-                <!-- Button -->
                 div(class="form-group")
                     label(class="col-md-4 control-label" for="singlebutton")
                         div(class="col-md-4")
