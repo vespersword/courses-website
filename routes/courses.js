@@ -76,7 +76,7 @@ router.get('/', async function(req, res, next) {
         return course;
     });
 
-    console.log(popular);
+    //console.log(popular);
 
     res.render('../views/courses',{
         session: req.session,
