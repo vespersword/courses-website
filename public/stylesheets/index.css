@@ -83,3 +83,7 @@ a.logo-a{
 .card{
     display: inline-block;
 }
+
+.form-group{
+    max-width: 50%;
+}

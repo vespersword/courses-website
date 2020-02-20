@@ -53,16 +53,33 @@ html
                     input(id="textinput" name="course_code" type="text" placeholder="Enter course code" class="form-control input-md" required="")
 
                 div(class="form-group")
-                    label(class="col-md-4 control-label" for="textinput") Course Category
-                    div(class="col-md-4")
-                    input(id="textinput" name="course_category" type="text" placeholder="Enter course category" class="form-control" required="")
+                    label(class="col-md-4 control-label" for="category") Course Category:
+                    select(class="form-control" id="category" name="course_category")
+                        option(value="MAT") Mathematics
+                        option(value="PHY") Physics
+                        option(value="CHY") Chemistry
+                        option(value="CSE") Computer Science
+                        option(value="HUM") Humanities
+                        option(value="OTHER") Other
 
                 div(class="form-group")
-                    label(class="col-md-4 control-label" for="selectbasic") Course Type
-                    div(class="col-md-2")
-                        select(id="selectbasic" name="course_type" class="form-control")
-                            option(value="General") General
-                            option(value="College") College
+                    label(class="col-md-4 control-label" for="instructor") Instructor:
+                    select(class="form-control" id="instructor" name="instructor")
+                        each instructor in instructor_list
+                            option(value=instructor.username) #{instructor.name}
+
+                div(class="form-group")
+                    label(class="col-md-4 control-label" for="university") University:
+                    select(class="form-control" id="university" name="university")
+                        option(value="No University") No University
+                        option(value="VITC") VIT Chennai
+                        option(value="VITC") VIT Vellore
+
+                div(class="form-group")
+                    div(class="col-md-4")
+                    div(class="form-check")
+                        label(class="col-md-4 control-label" for="checkboxes") Restrict enrollment to accounts affiliated with university.
+                        input(class="form-control-lg" type="checkbox" name="checkboxes" id="checkboxes" value="1")
 
                 div(class="form-group")
                     label(class="col-md-4 control-label" for="textarea") Course Description

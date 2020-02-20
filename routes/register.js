@@ -38,7 +38,8 @@ router.post('/', (req, res) => {
                     username: req.body.name,
                     password: req.body.password,
                     name: req.body.real_name,
-                    university: req.body.university
+                    university: req.body.university,
+                    user_type: req.body.account_type
                 });
                 user.save((err, user) =>{
                     if(err){

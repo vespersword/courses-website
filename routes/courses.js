@@ -37,27 +37,31 @@ router.get('/', function(req, res, next) {
         res.redirect('/');
     })
 
-router.get('/:coursecode', function(req, res){
+router.get('/:coursecode', async function(req, res){
+    try{
     var coursecode = req.params.coursecode;
     console.log(coursecode);
-    var course_page_promise = Course.find({course_code: coursecode},(err, course) =>{
+    var course = await Course.find({course_code: coursecode},(err, course) =>{
         if(err) return (err);
         return course;
     })
-    course_page_promise
-    .then((course)=>{
-        //console.log(course);
-        res.render('../views/course',{
-            session: req.session,
-            course: course
-        })
-        //console.log(course);
+    var teacher = await User.find({username: course[0].instructor},(err, user) =>{
+        if(err) return(err);
+        return user;
+    });
+
+    console.log(course);
+    res.render('../views/course',{
+        session: req.session,
+        course: course,
+        instructor: teacher
     })
-    .catch((err)=>{
+    }
+    catch(err){
         console.log(err);
         alert("Something went wrong. Redirecting you now.");
         res.redirect('/');
-    })
+    }
 })
 
 router.post('/:coursecode', enrollLoginChecker, async function(req, res){
@@ -66,6 +70,10 @@ router.post('/:coursecode', enrollLoginChecker, async function(req, res){
         if(err) return (err);
         return course;
     })
+    var teacher = await User.find({username: course[0].instructor},(err, user) =>{
+        if(err) return(err);
+        return user;
+    });
     if(req.session.courses_enrolled == null){
         req.session.courses_enrolled = [course[0].course_code];
         await User.updateOne({username: req.session.username}, {enrolled_courses: req.session.courses_enrolled},
@@ -86,7 +94,8 @@ router.post('/:coursecode', enrollLoginChecker, async function(req, res){
     }
     res.render('../views/course',{
         session: req.session,
-        course: course
+        course: course,
+        instructor: teacher
     })
 
     }

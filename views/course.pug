@@ -54,6 +54,8 @@ html
                                 input(type="submit" value="Dropout")
                     else
                         p(class="lead")
+                            | #{course[0].description}
+                            | Instructed by #{instructor[0].name}
                             | Click below to enroll
                             form(class="display-6" method="post" action="/courses/"+course[0].course_code)
                                 input(type="hidden" name="enroll_course_code" value=course[0].course_code)
