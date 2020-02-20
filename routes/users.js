@@ -45,24 +45,34 @@ router.get('/:username', LoginChecker, async function(req, res, next){
     //Increase page view count
     await User.updateOne({username: req.params.username}, {$inc:{no_views: 1}}, (err, suc)=>{
         if(err) return err;
-        return console.log("Page view count increased for "+req.params.username);
+        return //console.log("Page view count increased for "+req.params.username);
     });
     var userpage_user = await User.find({username: req.params.username}, (err, user)=>{
         if(err) return err;
         return user;
     })
+
+    var courses_taught = await Course.find({instructor: userpage_user[0].username},(err, courses)=>{
+        if(err) return err;
+        return courses;
+    })
     //console.log(courses_list);
     req.session.userpage_username = req.params.username;
     //console.log(userpage_user);
     req.session.userpage_usertype = userpage_user[0].user_type;
-    //req.session.
-    console.log(req.session)
+    //console.log(req.session)
     res.render('../views/user',{
         session: req.session,
-        course_list: courses_list
+        course_list: courses_list,
+        userpage: userpage_user[0],
+        courses_taught: courses_taught
     })
     }
     catch(e){console.log(e)};
+});
+
+router.post('/:username', async function(req, res, next){
+    res.send("Work in progress");
 });
 
 module.exports = router;

@@ -48,12 +48,11 @@ html
                             if session.userpage_usertype == "Instructor"
                                 a.list-group-item.list-group-item-action(data-toggle='list', href='#students', role='tab') My Students
                             if session.userpage_username == session.username
-                                a.list-group-item.list-group-item-action(data-toggle='list', href='#messages', role='tab') Edit Details
-                                a.list-group-item.list-group-item-action(data-toggle='list', href='#settings', role='tab') Other
+                                a.list-group-item.list-group-item-action(data-toggle='list', href='#edit', role='tab') Edit Details
                         // Tab panes
                 .col-8
                     .tab-content
-                        #home.tab-pane.active(role='tabpanel') This is 1
+                        #home.tab-pane.active(role='tabpanel') These are my courses
                             div(class="card-deck")
                                 each course in course_list
                                     .card.text-white.bg-primary.mb-3(style='max-width: 20rem;')
@@ -62,9 +61,59 @@ html
                                                 h5.card-title #{course.course_name}
                                                 p.card-text.text-white #{course.course_description}
                                                 a(href="/courses/"+course.course_code class="btn btn-primary") View Course Page
-                        #profile.tab-pane(role='tabpanel') This is 2
-                        #messages.tab-pane(role='tabpanel') This is 3
-                        #settings.tab-pane(role='tabpanel') This is 4
+                        #profile.tab-pane(role='tabpanel') These are my details
+                            br
+                            h4 Username: #{userpage.username}
+                            br
+                            h4 Name: #{userpage.name}
+                            br
+                            h4 description: #{userpage.description}
+                            br
+                            h4 User Type: #{userpage.user_type}
+                            br
+                            h4 User Page Views: #{userpage.no_views}
+                            br
+                            -var page_views = parseInt(userpage.reg_creds/2)
+                            h4 Registered Credits: #{page_views} 
+                        #students.tab-pane(role='tabpanel') These are my students from all the courses I take.
+                            div(class="card-deck")
+                                each course in courses_taught
+                                    each student in course.users_enrolled
+                                        .card.text-white.bg-primary.mb-3(style='max-width: 20rem;')
+                                            .card-header #{student}
+                                                .card-body
+                                                    h5.card-title #{course.course_name}
+                                                    a(href="/users/"+student class="btn btn-primary") View User Page
+
+                        #edit.tab-pane(role='tabpanel') This is 4
+                            div(class="d-flex justify-content-center")
+                                form(action="./register" method="post" oninput='re_pass.setCustomValidity(re_pass.value != password.value ? "Passwords do not match." : "")')
+                                    p
+                                    label(for="username") Username:
+                                    input(class="form-control" id="username" name="name" type='text' required)
+                                    p
+                                    label(for="account_type") Account Type:
+                                    select(class="form-control" id="account_type" name="account_type")
+                                        option(value="General") General
+                                        option(value="Instructor") Instructor
+                                    p
+                                    label(for="university") University:
+                                    select(class="form-control" id="university" name="university")
+                                        option(value="No University") No University
+                                        option(value="VITC") VIT Chennai
+                                        option(value="VITV") VIT Vellore
+                                    span(class="help-block") Select your affiliation
+                                    p
+                                    label(for="real_name") Name:
+                                    input(class="form-control" id="real_name" required name="real_name" type="text" placeholder="Enter your name here.")
+                                    p
+                                    label(for="password1") Password:
+                                    input(class="form-control" id="password1" type='password' required name='password')
+                                    p
+                                    label(for="password2") Confirm password:
+                                    input(class="form-control" id="password2" type='password' name='re_pass')
+                                    p
+                                    input(type='submit' value="Create account")
             
 
 
