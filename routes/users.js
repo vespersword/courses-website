@@ -14,8 +14,24 @@ var updateLoginChecker = (req, res, next) =>{
 }
 
 /* GET courses page. */
-router.get('/', function(req, res, next) {
-    res.send("Users page is a work in progress");
+router.get('/', async function(req, res, next) {
+    try{
+        var users = await User.find({user_type: "General"}, (err, user)=>{
+            if(err) return err;
+            return user;
+        });
+        var instructors = await User.find({user_type: "Instructor"}, (err, user)=>{
+            if(err) return err;
+            return user;
+        });
+        res.render("../views/users",{
+            session: req.session,
+            student_list: users,
+            instructor_list: instructors
+        });
+
+    }
+    catch(err){console.log(err)};
 })
 
 router.get('/:username', async function(req, res, next){
