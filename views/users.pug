@@ -10,7 +10,7 @@ html
                 img(class='logo-img' src="/images/book.svg" alt="This is my Logo")
                 div(class='logo'): h4 Coursem
             div(class='search-bar-container')
-                div(class='search-bar'): input(type=text placeholder="Search for your courses here...")
+                div(class='search-bar'): input(type="hidden" placeholder="Search for your courses here...")
             nav
                 ul(class='nav-links')
                     a(class='nav-link' href="./courses"): li Courses
@@ -23,16 +23,14 @@ html
                                 div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
                                     a(class="dropdown-item" href="./login") Login
                                     a(class="dropdown-item" href="./register") Register
-                                    a(class="dropdown-item" href="#") Extra
                     else
                         li(class='nav-link')
                             div(class="dropdown dropdown-menu-right")
                                 button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{user}
                                 div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
-                                    a(class="dropdown-item" href="./users/"+user) Signed in as #{user}
+                                    a(class="dropdown-item" href="./users/"+user) #{user}'s Page
                                     div(class="dropdown-divider")
                                     a(class="dropdown-item" href="./logout") Logout
-                                    a(class="dropdown-item" href="#") Extra
                                     if session.user_type=="Admin"
                                         div(class="dropdown-divider")
                                         a(class="dropdown-item" href="/add-course") Add Courses
@@ -45,12 +43,10 @@ html
                     #myList.list-group(role='tablist')
                         a.list-group-item.list-group-item-action.active(data-toggle='list', href='#home', role='tab') General
                         a.list-group-item.list-group-item-action(data-toggle='list', href='#profile', role='tab') Instructors
-                        a.list-group-item.list-group-item-action(data-toggle='list', href='#messages', role='tab') Computer Science
-                        a.list-group-item.list-group-item-action(data-toggle='list', href='#settings', role='tab') Other
                     // Tab panes
                 .col-8
                     .tab-content
-                        #home.tab-pane.active(role='tabpanel') This is 1
+                        #home.tab-pane.active(role='tabpanel') General Users
                             div(class="card-deck" )
                             each student in student_list
                                 .card.text-white.bg-primary.mb-3(style='max-width: 23rem;')
@@ -61,19 +57,17 @@ html
                                             | #{student.name}
                                             br
                                             a(href="/users/"+student.username class="btn btn-secondary") View User Page
-                        #profile.tab-pane(role='tabpanel') This is 2
+                        #profile.tab-pane(role='tabpanel') Instructors
                             div(class="card-deck" )
                             each teacher in instructor_list
-                                .card.text-white.bg-primary.mb-3(style='max-width: 23rem;')
-                                    .card-header #{teacher.name}
+                                .card.text-white.bg-danger.mb-3(style='max-width: 23rem;')
+                                    .card-header #{teacher.username}
                                         .card-body
-                                            h5.card-title #{teacher.username}
+                                            h5.card-title #{teacher.name}
                                             p.card-text.text-white 
                                             | #{teacher.username}
                                             br
                                             a(href="/users/"+teacher.username class="btn btn-secondary") View User Page
-                        #messages.tab-pane(role='tabpanel') This is 3
-                        #settings.tab-pane(role='tabpanel') This is 4
 
                     
                                         

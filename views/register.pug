@@ -10,7 +10,7 @@ html
                 img(class='logo-img' src="/images/book.svg" alt="This is my Logo")
                 div(class='logo'): h4 Coursem
             div(class='search-bar-container')
-                div(class='search-bar'): input(type=text placeholder="Search for your courses here...")
+                div(class='search-bar'): input(type="hidden" placeholder="Search for your courses here...")
             nav
                 ul(class='nav-links')
                     a(class='nav-link' href="./courses"): li Courses
@@ -21,9 +21,8 @@ html
                             div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
                                 a(class="dropdown-item" href="./login") Login
                                 a(class="dropdown-item" href="./register") Register
-                                a(class="dropdown-item" href="#") Extra
-        h1 This is the Register form
-        p #{message}
+        h1(style="color:red;") This is the Register form
+        h3 #{message}
         div(class="d-flex justify-content-center")
             form(action="./register" method="post" oninput='re_pass.setCustomValidity(re_pass.value != password.value ? "Passwords do not match." : "")')
                 p

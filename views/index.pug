@@ -10,7 +10,7 @@ html
                 img(class='logo-img' src="/images/book.svg" alt="This is my Logo")
                 div(class='logo'): h4 Coursem
             div(class='search-bar-container')
-                div(class='search-bar'): input(type="text" placeholder="Search for your courses here...")
+                div(class='search-bar'): input(type="hidden" placeholder="Search for your courses here...")
             nav
                 ul(class='nav-links')
                     a(class='nav-link' href="./courses"): li Courses
@@ -23,20 +23,17 @@ html
                                 div(class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton")
                                     a(class="dropdown-item" href="./login") Login
                                     a(class="dropdown-item" href="./register") Register
-                                    a(class="dropdown-item" href="#") Extra
                     else
                         li(class='nav-link')
                             div(class="dropdown dropdown-menu-right")
                                 button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{user}
                                 div(class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton")
-                                    a(class="dropdown-item" href="./users/"+user) Signed in as #{user}
+                                    a(class="dropdown-item" href="./users/"+user) #{user}'s Page
                                     div(class="dropdown-divider")
                                     a(class="dropdown-item" href="./logout") Logout
-                                    a(class="dropdown-item" href="#") Extra
                                     if session.user_type=="Admin"
                                         div(class="dropdown-divider")
                                         a(class="dropdown-item" href="/add-course") Add Courses
-                                        a(class="dropdown-item" href="/delete-course") Delete Courses
 
         main
             div(class="jumbotron card card-image jumbotron-fluid")
@@ -46,29 +43,44 @@ html
                         div(class="col-xl-7 pb-2")
                             h2: p(class="mx-5 mb-5") A platform where you can undergo training and enroll yourself in a variety of world class courses from various departments.
                     hr(class="my-4" style="border: 1px solid white")
-                    
-                    div(class="pt-2")
-                        a(class="btn btn-lg" style="background: red;" href="./login") Login
-                        a(class="btn btn-lg" style="background: grey;" href="./register") Register
-            
+                    if !user
+                        div(class="pt-2")
+                            a(class="btn btn-lg" style="background: red;" href="./login") Login
+                            a(class="btn btn-lg" style="background: grey;" href="./register") Register
+                    else
+                        div(class="pt-2")
+                            a(class="btn btn-lg" style="background: red;" href="./courses") Courses
+                            a(class="btn btn-lg" style="background: grey;" href="./users") Users
             div(class="container")
                 div(class="text-center"): h3 Achieve your dreams
                 div(class="row")
                     div(class="col-md-4")
                         h4 Get career ready
-                        p Donec id elit non mi porta gravida at eget metus.
-                        |Donec id elit non mi porta gravida at eget metus. 
-                        |Donec id elit non mi porta gravida at eget metus. 
-                        |Donec id elit non mi porta gravida at eget metus. 
+                        | This is a sentence about careers.
+                        br
+                        | Get your careers ready.
+                        br
+                        | This is another sentence about careers.
+                        br
+                        | Make the best out of your career. 
                     div(class="col-md-4")
                         h4 Learn from the best teachers
-                        p Donec id elit non mi porta gravida at eget metus.
-                        | Donec id elit non mi porta gravida at eget metus. 
-                        | Donec id elit non mi porta gravida at eget metus. 
-                        | Donec id elit non mi porta gravida at eget metus. 
+                        | This is about teachers.
+                        br
+                        | Here's another sentence about teachers.
+                        br
+                        | Isn't learning from the best teachers amazing?
+                        br
+                        | Here's the last sentence about learning.
                     div(class="col-md-4")
                         h4 Get the best skill development
-                        p Donec id elit non mi porta gravida at eget metus. 
+                        | Everybody loves skills.
+                        br
+                        | Get the best ones!
+                        br
+                        | Here is more words about skill development.
+                        br
+                        | This is the final sentence of placeholder text.
                 hr
                             
 
