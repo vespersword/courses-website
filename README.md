@@ -52,10 +52,11 @@ This website is a mix between an open online course platform and a course platfo
         Page view count is monitored for all course and user pages.
 
 <h3> Some screenshots: <h3>
-  ![Courses View] (https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/courses.png)
-  ![Edit] (https://raw.githubusercontent.com/vespersword/courses-website/blob/master/screenshots/edit.png)
-  ![My Courses] (https://raw.githubusercontent.com/vespersword/courses-website/blob/master/screenshots/my_courses.png)
-  ![Instructor's students] (https://raw.githubusercontent.com/vespersword/courses-website/blob/master/screenshots/reg_users.png)
-  ![Restrict test] (https://raw.githubusercontent.com/vespersword/courses-website/blob/master/screenshots/restrict_test.png)
-  ![credit_test] (https://raw.githubusercontent.com/vespersword/courses-website/blob/master/screenshots/credit_test.png)
+  
+  ![Courses View](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/courses.png)
+  ![Edit](https://raw.githubusercontent.com/vespersword/courses-website/blob/master/screenshots/edit.png)
+  ![My Courses](https://raw.githubusercontent.com/vespersword/courses-website/blob/master/screenshots/my_courses.png)
+  ![Instructor's students](https://raw.githubusercontent.com/vespersword/courses-website/blob/master/screenshots/reg_users.png)
+  ![Restrict test](https://raw.githubusercontent.com/vespersword/courses-website/blob/master/screenshots/restrict_test.png)
+  ![credit_test](https://raw.githubusercontent.com/vespersword/courses-website/blob/master/screenshots/credit_test.png)
 
