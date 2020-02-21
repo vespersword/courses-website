@@ -1,9 +1,9 @@
 Live demonstration: https://courses-website.herokuapp.com/
 This website is a mix between an open online course platform and a course platform from a college's point of view.
 
-<h2> Admin account details - Username: 'Admin' Password: 'admin' </h2>
-<h2> Account to test credit constraint when enrolling and university constraint(university of this account is VITC so try enrolling in Maths course MAT1002 which is for VITV only) <br>
-  Username: 'restrict_test' Password: 'password'
+<b> Admin account details - Username: 'Admin' Password: 'admin' </b>
+<b> Account to test credit constraint when enrolling and university constraint(university of this account is VITC so try enrolling in Maths course MAT1002 which is for VITV only) <br>
+  Username: 'restrict_test' Password: 'password' </b>
   
 <h1> This is a course registration website implemented with Express along with mongoDB Atlas and PUG as a template engine. </h1>
 
@@ -24,8 +24,9 @@ This website is a mix between an open online course platform and a course platfo
       Two models have been implemented - Course and User and they can be seen in the models folder.<br>
       Mongoose was used to interact with the database.
   <li> <b> Session</b>: <br>
-      Sessions have been used throughout the website to store relevant information in session variables and these session variables are used in every middleware function that checks the status of something.
-  
+      Sessions have been used throughout the website to store relevant information in session variables and these session variables are used in every middleware function that checks the status of something. <br>
+      Each session expires after 30 minutes and session is destroyed on logout.
+</ul>  
       
 
 <h2> Key Features </h2>
@@ -35,7 +36,7 @@ This website is a mix between an open online course platform and a course platfo
   <li><b> Course Creation:</b> <br>
         An admin exclusive feature which lets a course be created.
   <li> <b>Course Enrollment: </b><br>
-    Users can enroll themselves in courses and dropout of them too.
+    Users can enroll themselves in courses and dropout of them too. Both of these are done on the course page itself.
   <li><b> Open and University exclusive courses: </b><br>
         Courses can be open("No University") or belong to a university("VITC" or "VITV"). A university course can be open but if restricted only accounts affiliated with that university can enroll in the course.
   <li><b> Credit system for university accounts:</b>
@@ -50,29 +51,48 @@ This website is a mix between an open online course platform and a course platfo
         A page that shows all the course details.
   <li> <b> View Count: </b> <br>
         Page view count is monitored for all course and user pages.
-
-<h3> Some screenshots: <h3>
-  <h4> User details
     
-  ![Courses View](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/users_details.png)
+ <h2> Planned Features that were not completed on time: </h2>
+ <ul>
+  <li> <b> Course Rating System: </b> <br>
+    A simple 5 scale rating system that takes the average of all ratings by users to show course rating. <br>
+    <b> Reason for not completing: </b> <br>
+        Feature was thought up later and a lot of changes had to be made such as how a user's registered courses were tracked and so there wasn't enough time to make the necessary changes before the deadline. 
+  <li> <b> Sort users by popularity and courses by popularity or rating: </b> <br>
+      Some backend work done to view users or courses based on popularity. This is what page views(no_views) was measured for. <br>
+    <b> Reason for not completing: </b> Ran into issues using Mongoose to sort the results of a query. Rating system wasn't implemented as mentioned above.
+   <li> <b> Time Table: </b> <br>
+     This was a feature intended for accounts tied to a university and creates a timetable similar to VITs timetable. <br>
+     <b>Reason for not completing:</b> The issue was that neither of the models kept track of slots of university courses(course model doesn't even have a slot attribute) because the initial intention was to make a more general website with 
+coure registration rather than the hybrid general/university focused website created later.
+     
+<h2> Some screenshots: </h2>
+
+ <h4> Course Creation Page </h4>
   
-  <h4> User Edit Details 
+![course creation](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/course_create.png)
+  
+ <h4> User details </h4> 
+  
+  ![User Details](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/user_details.png)
+  
+ <h4> User Edit Details </h4> <br>
  
   ![edit](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/edit.png)
   
-  <h4> User Registered Courses
+  <h4> User Registered Courses </h4>
   
   ![my courses](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/my_courses.png)
   
-  <h4> Instructor's students
+  <h4> Instructor's students </h4>
   
   ![registered users](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/reg_users.png)
   
-  <h4> Courses View Page
+  <h4> Courses View Page </h4>
     
   ![Courses View](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/courses.png)
   
-  <h4> Restricted Course 
+  <h4> Restricted Course </h4>
   
   ![restrict test](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/restrict_test.png)
   <h4> Credits Check
