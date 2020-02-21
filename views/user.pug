@@ -38,7 +38,7 @@ html
                                         a(class="dropdown-item" href="/add-course") Add Courses
 
         main
-            h1 Below is our user page,
+            h1 Below is #{userpage.username}'s page,
             .row
                 .col-3
                     #myList.list-group(role='tablist')
@@ -55,7 +55,7 @@ html
                         #home.tab-pane.active(role='tabpanel') These are my courses
                             div(class="card-deck")
                                 each course in course_list
-                                    .card.text-white.bg-primary.mb-3(style='max-width: 20rem;')
+                                    .card.text-white.bg-primary.mb-3(style='max-width: 23rem;')
                                         .card-header #{course.course_code}
                                             .card-body
                                                 h5.card-title #{course.course_name}
@@ -71,15 +71,15 @@ html
                             br
                             h4 User Type: #{userpage.user_type}
                             br
-                            h4 User Page Views: #{userpage.no_views}
+                            -var page_views = parseInt(userpage.no_views/2)
+                            h4 User Page Views: #{page_views}
                             br
-                            -var page_views = parseInt(userpage.reg_creds/2)
-                            h4 Registered Credits: #{page_views} 
+                            h4 Registered Credits: #{userpage.reg_creds} 
                         #students.tab-pane(role='tabpanel') These are my students from all the courses I take.
                             div(class="card-deck")
                                 each course in courses_taught
                                     each student in course.users_enrolled
-                                        .card.text-white.bg-primary.mb-3(style='max-width: 20rem;')
+                                        .card.text-white.bg-primary.mb-3(style='max-width: 100%;')
                                             .card-header #{student}
                                                 .card-body
                                                     h5.card-title #{course.course_name}

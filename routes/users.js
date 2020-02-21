@@ -37,11 +37,7 @@ router.get('/', async function(req, res, next) {
 
 router.get('/:username', LoginChecker, async function(req, res, next){
     try{
-    //console.log(req.session);
-    var courses_list = await Course.find({course_code: {$in: req.session.courses_enrolled}}, function(err, course){
-        if(err) return err;
-        return course;
-    });
+    //console.log(courses_list);
     //Increase page view count
     await User.updateOne({username: req.params.username}, {$inc:{no_views: 1}}, (err, suc)=>{
         if(err) return err;
@@ -51,6 +47,14 @@ router.get('/:username', LoginChecker, async function(req, res, next){
         if(err) return err;
         return user;
     })
+    //console.log(userpage_user);
+    //console.log(req.session);
+    var courses_list = await Course.find({course_code: {$in: userpage_user[0].enrolled_courses}}, function(err, course){
+        if(err) return err;
+        return course;
+    });
+
+    //console.log(courses_list);
 
     var courses_taught = await Course.find({instructor: userpage_user[0].username},(err, courses)=>{
         if(err) return err;
