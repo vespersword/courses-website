@@ -68,7 +68,7 @@ coure registration rather than the hybrid general/university focused website cre
      
 <h2> Some screenshots: </h2>
 
- <h4> Course Creation Page </h4>
+ <h4> Course Creation </h4>
   
 ![course creation](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/course_create.png)
   
