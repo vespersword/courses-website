@@ -20,6 +20,9 @@ var checkUniExclusive = (req, res, next) =>{
         if(req.session.user_university!=req.session.course_university){
             req.flash('error', 'This course is only available to those enrolled in the same university.');
         }
+        else{
+            return next();
+        }
     }
     else{
         next();
@@ -27,7 +30,7 @@ var checkUniExclusive = (req, res, next) =>{
 }
 
 var checkCredits = (req, res, next) => {
-    //console.log("Credit check middleware ran here");
+    console.log("Credit check middleware ran here");
     if(req.session.course_restrict=="false") return next();
     var cred_sum = req.session.reg_creds + req.session.course_credits;
     console.log(cred_sum);
