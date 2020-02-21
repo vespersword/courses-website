@@ -123,7 +123,7 @@ router.get('/:coursecode', async function(req, res){
     req.session.course_restrict = course[0].uni_exclusive;
     //console.log(req.session.course_restrict);
     req.session.course_credits = course[0].credits;
-
+    console.log()
     //Saving enrolled users to session variable for use on this oage during POST. Deleted after posting.
     req.session.users_enrolled = course[0].users_enrolled;
     
@@ -192,7 +192,7 @@ router.post('/:coursecode', enrollLoginChecker, checkUniExclusive, checkCredits,
     else{
         req.session.courses_enrolled.push(course[0].course_code);
         //var user_name = req.session.username;
-        await User.updateOne({username: req.session.username}, {enrolled_courses: req.session.courses_enrolled},
+        await User.updateOne({username: req.session.username}, {enrolled_courses: req.session.courses_enrolled, reg_creds: req.session.reg_creds},
             (err, numUpdated) => {
                 if(err) return err;
                 console.log("Course added successfully in DB");
