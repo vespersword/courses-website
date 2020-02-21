@@ -52,9 +52,9 @@ This website is a mix between an open online course platform and a course platfo
         Page view count is monitored for all course and user pages.
 
 <h3> Some screenshots: <h3>
-  <h4> Courses View Page
+  <h4> User details
     
-  ![Courses View](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/courses.png)
+  ![Courses View](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/users_details.png)
   
   <h4> User Edit Details 
  
@@ -67,6 +67,10 @@ This website is a mix between an open online course platform and a course platfo
   <h4> Instructor's students
   
   ![registered users](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/reg_users.png)
+  
+  <h4> Courses View Page
+    
+  ![Courses View](https://raw.githubusercontent.com/vespersword/courses-website/master/screenshots/courses.png)
   
   <h4> Restricted Course 
   
