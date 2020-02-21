@@ -20,8 +20,12 @@ This website is a mix between an open online course platform and a course platfo
       </ul>
     <li> <b>PUG Conditionals</b>: <br>
       PUG conditionals and loops have been used throughout the website to render data easily. Loops usually used to display data from database and conditionals to show or hide data based on type of user and if logged in or not.
-    <li><b> MongoDB</b>: <br>
-      Two models have been implemented - Course and User.
+    <li><b> MongoDB with Mongoose</b>: <br>
+      Two models have been implemented - Course and User and they can be seen in the models folder.<br>
+      Mongoose was used to interact with the database.
+  <li> <b> Session</b>: <br>
+      Sessions have been used throughout the website to store relevant information in session variables and these session variables are used in every middleware function that checks the status of something.
+  
       
 
 <h2> Key Features </h2>
@@ -47,4 +51,5 @@ This website is a mix between an open online course platform and a course platfo
   <li> <b> View Count: </b> <br>
         Page view count is monitored for all course and user pages.
 
-    
+<h3> Some screenshots: <h3>
+
